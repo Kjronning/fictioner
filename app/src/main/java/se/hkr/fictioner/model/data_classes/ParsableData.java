@@ -3,11 +3,11 @@ package se.hkr.fictioner.model.data_classes;
 import org.json.JSONObject;
 
 public abstract class ParsableData {
-    Book book;
-    String userId;
-    String documentName;
-    long lastUpdated;
-    final String TYPE;
+    private String bookId;
+    private String userId;
+    private String documentName;
+    private long lastUpdated;
+    private final String TYPE;
 
     public ParsableData(String type){
         TYPE = type;
