@@ -2,9 +2,7 @@ package se.hkr.fictioner.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
-
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.databinding.MainActivityBinding;
 
