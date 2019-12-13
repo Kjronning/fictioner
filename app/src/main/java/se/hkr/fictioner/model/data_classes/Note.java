@@ -2,19 +2,33 @@ package se.hkr.fictioner.model.data_classes;
 
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public class Note extends ParsableData {
+
+    private String body;
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 
     public Note(){
         super("NOTE");
     }
 
     @Override
-    JSONObject parseToJSON() {
-        return null;
+    Map<String,Object> parseToDocumentMap() {
+        Map<String, Object> map = super.parseToDocumentMap();
+        map.put("body", body);
+        return map;
     }
 
     @Override
-    ParsableData parseFromJSON() {
+    ParsableData parseFromDocumentMap() {
         return null;
     }
 }
