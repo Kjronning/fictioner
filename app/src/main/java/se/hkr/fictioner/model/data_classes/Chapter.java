@@ -9,6 +9,12 @@ public class Chapter extends ParsableData {
     private String name;
     private String body;
 
+    public Chapter(Map<String, Object> map){
+        super(map);
+        this.name = (String)map.get("name");
+        this.body = (String)map.get("body");
+    }
+
     public String getName() {
         return name;
     }
@@ -35,10 +41,5 @@ public class Chapter extends ParsableData {
         map.put("body", body);
         return map;
 
-    }
-
-    @Override
-    ParsableData parseFromDocumentMap() {
-        return null;
     }
 }

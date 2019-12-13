@@ -9,6 +9,12 @@ public class Location extends ParsableData {
     private String name;
     private String summary;
 
+    public Location(Map<String, Object> map){
+        super(map);
+        this.name = (String)map.get("name");
+        this.summary = (String)map.get("summary");
+    }
+
     public String getName() {
         return name;
     }
@@ -34,10 +40,5 @@ public class Location extends ParsableData {
         map.put("name", name);
         map.put("summary", summary);
         return map;
-    }
-
-    @Override
-    ParsableData parseFromDocumentMap() {
-        return null;
     }
 }

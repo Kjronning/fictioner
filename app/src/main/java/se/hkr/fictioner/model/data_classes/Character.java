@@ -6,6 +6,12 @@ import java.util.Map;
 
 public class Character extends ParsableData {
 
+    public Character(Map<String, Object> map){
+        super(map);
+        this.name = (String)map.get("name");
+        this.summary = (String)map.get("summary");
+    }
+
     private String name;
     private String summary;
 
@@ -35,10 +41,5 @@ public class Character extends ParsableData {
        map.put("name", name);
        map.put("summary", summary);
        return map;
-    }
-
-    @Override
-    ParsableData parseFromDocumentMap() {
-        return null;
     }
 }

@@ -8,6 +8,11 @@ public class Note extends ParsableData {
 
     private String body;
 
+    public Note(Map<String, Object> map){
+        super(map);
+        this.body = (String)map.get("body");
+    }
+
     public String getBody() {
         return body;
     }
@@ -25,10 +30,5 @@ public class Note extends ParsableData {
         Map<String, Object> map = super.parseToDocumentMap();
         map.put("body", body);
         return map;
-    }
-
-    @Override
-    ParsableData parseFromDocumentMap() {
-        return null;
     }
 }

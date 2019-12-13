@@ -1,11 +1,9 @@
 package se.hkr.fictioner.model.data_classes;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class ParsableData {
+public abstract class ParsableData {
     private String bookId;
     private String userId;
     private String documentName;
@@ -39,8 +37,15 @@ abstract class ParsableData {
         this.documentName = documentName;
     }
 
-    ParsableData(String type){
+    public ParsableData(String type){
         TYPE = type;
+    }
+
+    public ParsableData(Map<String, Object> map) {
+        this.bookId = (String)map.get("bookId");
+        this.userId = (String)map.get("userId");
+        this.documentName = (String)map.get("documentName");
+        this.TYPE = (String)map.get("TYPE");
     }
 
     Map<String, Object> parseToDocumentMap(){
@@ -51,6 +56,4 @@ abstract class ParsableData {
         map.put("TYPE", TYPE);
         return map;
     }
-    abstract ParsableData parseFromDocumentMap();
-
 }
