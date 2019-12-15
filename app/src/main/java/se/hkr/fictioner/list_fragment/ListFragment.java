@@ -21,7 +21,7 @@ public class ListFragment <T extends RealmObject> implements ListFragmentContrac
 
     public ListFragment(Class<T> tClass){
         //create that shit?
-        presenter = new ListFragmentPresenter<>(this);
+        presenter = new ListFragmentPresenter<T>(this);
         adapter = new MyAdapter<>(null, true);
         presenter.fetchRealmObjectList(tClass);
     }

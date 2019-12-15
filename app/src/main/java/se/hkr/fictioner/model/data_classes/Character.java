@@ -1,10 +1,8 @@
 package se.hkr.fictioner.model.data_classes;
 
-import org.json.JSONObject;
-
 import java.util.Map;
 
-public class Character extends ParsableData {
+public class Character extends BookData {
 
     public Character(Map<String, Object> map){
         super(map);
@@ -14,6 +12,8 @@ public class Character extends ParsableData {
 
     private String name;
     private String summary;
+
+    public Character(){}
 
     public String getName() {
         return name;
@@ -31,9 +31,6 @@ public class Character extends ParsableData {
         this.summary = summary;
     }
 
-    public Character(){
-        super("CHARACTER");
-    }
 
     @Override
     Map<String,Object> parseToDocumentMap() {

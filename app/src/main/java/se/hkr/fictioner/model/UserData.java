@@ -1,6 +1,7 @@
 package se.hkr.fictioner.model;
 
 import io.realm.RealmObject;
+import se.hkr.fictioner.model.data_classes.User;
 import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class UserData extends RealmObject {
@@ -40,5 +41,9 @@ public class UserData extends RealmObject {
     public void logout(){
         currentBookId = "";
         userId = "";
+    }
+
+    public void setUser(User user) {
+        this.userId = user.getId();
     }
 }

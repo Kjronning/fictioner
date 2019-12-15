@@ -1,12 +1,12 @@
 package se.hkr.fictioner.model.data_classes;
 
-import org.json.JSONObject;
-
 import java.util.Map;
 
-public class Event extends ParsableData {
+public class Event extends BookData {
     private String name;
     private String summary;
+
+    public Event(){}
 
     public Event(Map<String, Object> map){
         super(map);
@@ -14,9 +14,6 @@ public class Event extends ParsableData {
         this.summary = (String)map.get("summary");
     }
 
-    public Event(){
-        super("EVENT");
-    }
 
     public String getName() {
         return name;

@@ -1,13 +1,13 @@
 package se.hkr.fictioner.model.data_classes;
 
-import org.json.JSONObject;
-
 import java.util.Map;
 
-public class Location extends ParsableData {
+public class Location extends BookData {
 
     private String name;
     private String summary;
+
+    public Location(){}
 
     public Location(Map<String, Object> map){
         super(map);
@@ -31,9 +31,6 @@ public class Location extends ParsableData {
         this.summary = summary;
     }
 
-    public Location(){
-        super("LOCATION");
-    }
     @Override
     Map<String,Object> parseToDocumentMap() {
         Map<String, Object> map = super.parseToDocumentMap();

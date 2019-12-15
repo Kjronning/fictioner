@@ -1,25 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="presenter"
             type="se.hkr.fictioner.main.MainPresenter" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.MainActivity">
 
     <TextView
+        android:id="@+id/username_textview"
+        android:textSize="@dimen/login_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/username"
+        android:layout_centerInParent="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/username_input"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/username_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/login_margin"
+            android:background="@color/colorPrimary"
+            android:text="@{presenter.username}" />
+    <TextView
+        android:id="@+id/password_textview"
+        android:textSize="@dimen/login_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        android:layout_below="@+id/username_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/login_margin"
+        />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/password_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/login_margin"
+            android:background="@color/colorPrimary"
+            android:inputType="textPassword"
+            android:text="@{presenter.password" />
+
+
+</RelativeLayout>
 </layout>

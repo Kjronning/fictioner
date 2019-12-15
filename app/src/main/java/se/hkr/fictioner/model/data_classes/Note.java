@@ -1,12 +1,12 @@
 package se.hkr.fictioner.model.data_classes;
 
-import org.json.JSONObject;
-
 import java.util.Map;
 
-public class Note extends ParsableData {
+public class Note extends BookData {
 
     private String body;
+
+    public Note(){}
 
     public Note(Map<String, Object> map){
         super(map);
@@ -19,10 +19,6 @@ public class Note extends ParsableData {
 
     public void setBody(String body) {
         this.body = body;
-    }
-
-    public Note(){
-        super("NOTE");
     }
 
     @Override

@@ -3,6 +3,8 @@ package se.hkr.fictioner.main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.databinding.MainActivityBinding;
 import se.hkr.fictioner.model.UserData;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
             presenter.handleLoggedIn();
     }
 
+    @Override
+    public void makeToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT);
+    }
 
     @Override
     public void changeScreen() {

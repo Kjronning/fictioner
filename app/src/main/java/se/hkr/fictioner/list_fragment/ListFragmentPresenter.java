@@ -2,7 +2,7 @@ package se.hkr.fictioner.list_fragment;
 
 import se.hkr.fictioner.model.data_management.DataRepository;
 
-public class ListFragmentPresenter implements ListFragmentContract.Presenter {
+public class ListFragmentPresenter<T> implements ListFragmentContract.Presenter {
 
     private ListFragmentContract.ContractView contractView;
 

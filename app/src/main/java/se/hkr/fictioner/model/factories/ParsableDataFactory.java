@@ -6,7 +6,7 @@ import se.hkr.fictioner.model.data_classes.*;
 import se.hkr.fictioner.model.data_classes.Character;
 
 public class ParsableDataFactory {
-    ParsableData getParsableDataFromMap(Map<String, Object> map) {
+    BookData getParsableDataFromMap(Map<String, Object> map) {
         switch ((String) map.get("TYPE")) {
             case "CHARACTER":
                 return new Character(map);
