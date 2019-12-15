@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Fictioner</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_character">Character</string>
+    <string name="title_book">Book</string>
+    <string name="title_event">Event</string>
+    <string name="title_location">Location</string>
 </resources>
