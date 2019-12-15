@@ -7,18 +7,17 @@ import io.realm.RealmObject;
 import io.realm.RealmResults;
 import se.hkr.fictioner.model.UserData;
 
-public class LocalDataSource {
+class LocalDataSource {
 
-    public static void Initialize(Context context){
+    static void Initialize(Context context){
         Realm.init(context);
     }
 
-    public static Realm getInsance(){
+    static Realm GetInstance(){
         return Realm.getDefaultInstance();
     }
 
-
-    public static <T extends RealmObject> RealmResults<T> getItemsFromCurrentBook(Class itemClass) {
-        return LocalDataSource.getInsance().where(itemClass).equalTo("book.id", UserData.getInstance().getCurrentBookId()).findAll();
+    static <T extends RealmObject> RealmResults<T> GetItemsFromCurrentBook(Class itemClass) {
+        return GetInstance().where(itemClass).equalTo("book.id", UserData.getInstance().getCurrentBookId()).findAll();
     }
 }

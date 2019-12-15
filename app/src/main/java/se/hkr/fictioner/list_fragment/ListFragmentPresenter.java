@@ -1,6 +1,6 @@
 package se.hkr.fictioner.list_fragment;
 
-import se.hkr.fictioner.model.data_management.LocalDataSource;
+import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class ListFragmentPresenter implements ListFragmentContract.Presenter {
 
@@ -12,6 +12,6 @@ public class ListFragmentPresenter implements ListFragmentContract.Presenter {
 
     @Override
     public void fetchRealmObjectList(Class itemClass) {
-        contractView.setListItems(LocalDataSource.getItemsFromCurrentBook(itemClass));
+        contractView.setListItems(DataRepository.GetItemsFromCurrentBook(itemClass));
     }
 }

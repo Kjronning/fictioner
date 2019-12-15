@@ -1,7 +1,7 @@
 package se.hkr.fictioner.model;
 
 import io.realm.RealmObject;
-import se.hkr.fictioner.model.data_management.LocalDataSource;
+import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class UserData extends RealmObject {
     private static UserData ourInstance;
@@ -10,7 +10,7 @@ public class UserData extends RealmObject {
 
     public static UserData getInstance() {
         if (ourInstance==null){
-            ourInstance = LocalDataSource.getInsance().where(UserData.class).findFirst();
+            ourInstance = DataRepository.GetUserData();
         }
         if (ourInstance==null){
             ourInstance = new UserData();
