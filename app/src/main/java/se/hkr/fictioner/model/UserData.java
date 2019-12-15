@@ -1,6 +1,7 @@
 package se.hkr.fictioner.model;
 
 import io.realm.RealmObject;
+import se.hkr.fictioner.model.data_management.LocalDataSource;
 
 public class UserData extends RealmObject {
     private static UserData ourInstance;
@@ -8,6 +9,9 @@ public class UserData extends RealmObject {
     private String userId;
 
     public static UserData getInstance() {
+        if (ourInstance==null){
+            ourInstance = LocalDataSource.getInsance().where(UserData.class).findFirst();
+        }
         if (ourInstance==null){
             ourInstance = new UserData();
         }
@@ -33,7 +37,8 @@ public class UserData extends RealmObject {
         this.userId = userId;
     }
 
-    public static void setData(UserData userData) {
-        ourInstance = userData;
+    public void logout(){
+        currentBookId = "";
+        userId = "";
     }
 }

@@ -11,6 +11,12 @@ public class MainPresenter implements MainContract.Presenter{
 
     @Override
     public void handleLoginButtonPress(View view) {
+        //Set UserData to login user, fetch current book from database.
+        contractView.changeScreen();
+    }
+
+    @Override
+    public void handleLoggedIn() {
         contractView.changeScreen();
     }
 }

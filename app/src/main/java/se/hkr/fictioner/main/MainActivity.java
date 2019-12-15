@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.databinding.MainActivityBinding;
+import se.hkr.fictioner.model.UserData;
 import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class MainActivity extends AppCompatActivity implements MainContract.ContractView {
@@ -19,16 +20,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
         presenter = new MainPresenter(this);
         MainActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
         binding.setPresenter(presenter);
+        if (!UserData.getInstance().getUserId().equals(""))
+            presenter.handleLoggedIn();
     }
 
-    @Override
-    public void loginSuccessful() {
-
-    }
 
     @Override
     public void changeScreen() {
-        //Change the screen
+        //Change the screen to BottomNavigationActivity
     }
 
 }
