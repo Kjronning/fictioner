@@ -1,7 +1,11 @@
 package se.hkr.fictioner.model;
 
-public class UserData {
+import io.realm.RealmObject;
+
+public class UserData extends RealmObject {
     private static UserData ourInstance;
+    private String currentBookId;
+    private String userId;
 
     public static UserData getInstance() {
         if (ourInstance==null){
@@ -13,5 +17,23 @@ public class UserData {
     private UserData() {
     }
 
+    public void setCurrentBook(String bookId){
+        currentBookId = bookId;
+    }
 
+    public String getCurrentBookId() {
+        return currentBookId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public static void setData(UserData userData) {
+        ourInstance = userData;
+    }
 }

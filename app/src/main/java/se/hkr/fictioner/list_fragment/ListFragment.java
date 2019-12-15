@@ -12,32 +12,33 @@ import io.realm.OrderedRealmCollection;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
 import se.hkr.fictioner.R;
 
 public class ListFragment <T extends RealmObject> implements ListFragmentContract.ContractView {
-    ListFragmentPresenter<T> presenter;
-    MyAdapter<T> adapter;
+    private ListFragmentPresenter<T> presenter;
+    private MyAdapter<T> adapter;
 
-    public ListFragment(ListFragmentPresenter<T> presenter){
+    public ListFragment(Class<T> tClass){
         //create that shit?
         presenter = new ListFragmentPresenter<>(this);
         adapter = new MyAdapter<>(null, true);
-        presenter.fetchRealmObjectList();
+        presenter.fetchRealmObjectList(tClass);
     }
 
 
     @Override
-    public void setListItems(RealmList items) {
+    public void setListItems(RealmResults items) {
         adapter.updateData(items);
     }
 }
 
 class MyAdapter<T extends RealmObject> extends RealmRecyclerViewAdapter {
-    public MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
+    MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
     }
 
-    public MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, boolean updateOnModification) {
+    MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, boolean updateOnModification) {
         super(data, autoUpdate, updateOnModification);
     }
 
@@ -56,7 +57,7 @@ class MyAdapter<T extends RealmObject> extends RealmRecyclerViewAdapter {
 
 class ViewHolder extends RecyclerView.ViewHolder{
 
-    public ViewHolder(@NonNull View itemView) {
+    ViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 }

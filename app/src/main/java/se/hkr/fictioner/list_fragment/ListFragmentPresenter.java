@@ -1,7 +1,9 @@
 package se.hkr.fictioner.list_fragment;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
+import se.hkr.fictioner.model.UserData;
+import se.hkr.fictioner.model.data_management.LocalDataSource;
 
 public class ListFragmentPresenter<T extends RealmObject> implements ListFragmentContract.Presenter {
 
@@ -12,10 +14,9 @@ public class ListFragmentPresenter<T extends RealmObject> implements ListFragmen
     }
 
     @Override
-    public void fetchRealmObjectList() {
+    public void fetchRealmObjectList(Class itemClass) {
         //get T.class list from local database for selected book.
-        RealmList<T> items = new RealmList<>();
-        //set list in view.
+        RealmResults<T> items = LocalDataSource.getInsance().where(itemClass).equalTo("book.id", UserData.getInstance().getCurrentBookId()).findAll();
         contractView.setListItems(items);
     }
 }

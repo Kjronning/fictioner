@@ -2,8 +2,10 @@ package se.hkr.fictioner.model.data_classes;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Book extends RealmObject {
+    @PrimaryKey
     private String id;
     private String userId;
     private RealmList<Chapter> chapters;

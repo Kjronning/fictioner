@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public abstract class ParsableData extends RealmObject {
+    @PrimaryKey
     private String documentName;
+    private Book book;
     private final String TYPE;
 
     public String getTYPE(){
@@ -35,5 +38,13 @@ public abstract class ParsableData extends RealmObject {
         map.put("documentName", documentName);
         map.put("TYPE", TYPE);
         return map;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }
