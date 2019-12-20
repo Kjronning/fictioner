@@ -48,4 +48,8 @@ public class User extends RealmObject {
     public void setCurrentBookId(String currentBookId) {
         this.currentBookId = currentBookId;
     }
+
+    public boolean isPasswordCorrect(String password) {
+        return this.password.equals(password);
+    }
 }

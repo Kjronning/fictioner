@@ -23,8 +23,20 @@ class LocalDataSource {
         return GetInstance().where(itemClass).equalTo("book.id", UserData.getInstance().getUser().getCurrentBookId()).findAll();
     }
 
+    static User GetUserById(String username){
+        return GetInstance().where(User.class).equalTo("id", username).findFirst();
+    }
+
     static User FindUsernameAndPassword(String username, String password) {
-        return GetInstance().where(User.class).equalTo("id", username).contains("password",password).findFirst();
+        User managedUser = GetInstance().where(User.class).equalTo("id", username).findFirst();
+        if (managedUser == null){
+            return null;
+        }
+        if (managedUser.isPasswordCorrect(password)){
+            return managedUser;
+        }else{
+            return null;
+        }
     }
 
     static boolean IsPermanentUserData() {
@@ -36,7 +48,11 @@ class LocalDataSource {
     }
 
     static void AddUserToDatabase(User user) {
-        GetInstance().createObject(user.getClass(), user);
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        realm.copyToRealm(user);
+        realm.commitTransaction();
+
     }
 
     static boolean IsUserInDatabase(String username) {

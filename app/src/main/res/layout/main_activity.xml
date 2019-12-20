@@ -17,19 +17,21 @@
             android:id="@+id/username_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200sp"
+            android:text="@string/email"
             android:textSize="@dimen/login_text_size" />
 
         <EditText
             android:id="@+id/username_input"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_below="@+id/username_textview"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/login_margin"
-            android:background="@color/colorPrimary"
-            android:text="@{presenter.username}" />
+            android:inputType="textWebEmailAddress"
+            android:background="@android:color/darker_gray"
+            android:text="@={presenter.username}" />
 
         <TextView
             android:id="@+id/password_textview"
@@ -43,21 +45,35 @@
 
         <EditText
             android:id="@+id/password_input"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_below="@+id/password_textview"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/login_margin"
-            android:background="@color/colorPrimary"
+            android:background="@android:color/darker_gray"
             android:inputType="textPassword"
-            android:text="@{presenter.password}" />
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="@string/log_in"
-            android:layout_marginTop="30sp"
+            android:text="@={presenter.password}" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/password_input"
-            android:onClick="@{presenter::handleLoginButtonPress}"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:onClick="@{presenter::handleLoginButtonPress}"
+                android:text="@string/log_in" />
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:text="@string/register"
+                android:onClick="@{presenter::handleRegisterButtonPress}"
+                />
+        </LinearLayout>
+
 
     </RelativeLayout>
 </layout>

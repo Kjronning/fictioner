@@ -33,10 +33,14 @@ public class MainPresenter implements MainContract.Presenter{
     @Override
     public void handleLoginButtonPress(View view) {
         //Set UserData to login user, fetch current book from database.
-        User user = DataRepository.GetUserFromDataSource(username, password);
+        User user = DataRepository.GetUserFromDataSource(username);
         if(user != null){
-            DataRepository.SetUserForSession(user);
-            contractView.changeScreen();
+            if(user.isPasswordCorrect(password)){
+                DataRepository.SetUserForSession(user);
+                contractView.changeScreen();
+            }else{
+                contractView.makeToast("Password Incorrect");
+            }
         }else{
             contractView.makeToast("User not found");
         }
@@ -53,6 +57,7 @@ public class MainPresenter implements MainContract.Presenter{
             contractView.makeToast("User already exists");
         }else{
             DataRepository.CreateNewUser(new User(username,password));
+            contractView.makeToast("Register successful");
         }
     }
 }

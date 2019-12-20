@@ -23,8 +23,8 @@ public class DataRepository {
         //TODO: Implement method when Remote database is setup.
     }
 
-    public static User GetUserFromDataSource(String username, String password) {
-        return LocalDataSource.FindUsernameAndPassword(username, password);
+    public static User GetUserFromDataSource(String username) {
+        return LocalDataSource.GetUserById(username);
     }
 
     public static void SetUserForSession(User user) {

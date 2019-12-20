@@ -8,7 +8,8 @@
     <string name="title_book">Book</string>
     <string name="title_event">Event</string>
     <string name="title_location">Location</string>
-    <string name="username">Username</string>
-    <string name="password">password</string>
+    <string name="email">E-mail address</string>
+    <string name="password">Password</string>
     <string name="log_in">Log in</string>
+    <string name="register">Register</string>
 </resources>
