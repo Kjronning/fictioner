@@ -5,6 +5,11 @@ import android.content.Context;
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import se.hkr.fictioner.model.data_classes.Chapter;
+import se.hkr.fictioner.model.data_classes.Character;
+import se.hkr.fictioner.model.data_classes.Event;
+import se.hkr.fictioner.model.data_classes.Location;
+import se.hkr.fictioner.model.data_classes.Note;
 import se.hkr.fictioner.model.user_credentials.PermanentUserData;
 import se.hkr.fictioner.model.user_credentials.UserData;
 import se.hkr.fictioner.model.data_classes.User;
@@ -47,13 +52,62 @@ class LocalDataSource {
         return GetInstance().where(PermanentUserData.class).findFirst();
     }
 
+    static void SetPermanentUserData(){
+
+    }
+
     static void AddUserToDatabase(User user) {
         Realm realm = GetInstance();
         realm.beginTransaction();
         realm.copyToRealm(user);
         realm.commitTransaction();
+    }
+
+    private static void SaveOrUpdateObjectToRealm(RealmObject object){
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(object);
+        realm.commitTransaction();
+    }
+
+    static void UpdatePermanentUserData(PermanentUserData permanentUserData){
+        SaveOrUpdateObjectToRealm(permanentUserData);
+    }
+
+    static void AddChapterToCurrentBook(Chapter chapter){
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        UserData.getInstance().getUser().getCurrentBook().getChapters().add(chapter);
+        realm.commitTransaction();
+    }
+
+    static void AddCharacterToCurrentBook(Character character){
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        UserData.getInstance().getUser().getCurrentBook().getCharacters().add(character);
+        realm.commitTransaction();
 
     }
+    static void AddLocationToCurrentBook(Location location){
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        UserData.getInstance().getUser().getCurrentBook().getLocations().add(location);
+        realm.commitTransaction();
+    }
+    static void AddEventToCurrentBook(Event event){
+       Realm realm = GetInstance();
+       realm.beginTransaction();
+       UserData.getInstance().getUser().getCurrentBook().getEvents().add(event);
+       realm.commitTransaction();
+    }
+
+    static void AddNoteToCurrentBook(Note note){
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        UserData.getInstance().getUser().getCurrentBook().getNotes().add(note);
+        realm.commitTransaction();
+    }
+
 
     static boolean IsUserInDatabase(String username) {
        return GetInstance().where(User.class).contains("id",username).count() == 1;

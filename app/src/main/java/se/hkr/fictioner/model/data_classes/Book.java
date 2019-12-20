@@ -37,4 +37,44 @@ public class Book extends RealmObject {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public RealmList<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(RealmList<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public RealmList<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(RealmList<Character> characters) {
+        this.characters = characters;
+    }
+
+    public RealmList<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(RealmList<Event> events) {
+        this.events = events;
+    }
+
+    public RealmList<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(RealmList<Location> locations) {
+        this.locations = locations;
+    }
+
+    public RealmList<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(RealmList<Note> notes) {
+        this.notes = notes;
+    }
 }

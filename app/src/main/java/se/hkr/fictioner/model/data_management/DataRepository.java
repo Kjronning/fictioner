@@ -27,6 +27,10 @@ public class DataRepository {
         return LocalDataSource.GetUserById(username);
     }
 
+    public static void SaveUserData(User user){
+        LocalDataSource.UpdatePermanentUserData(new PermanentUserData(user));
+    }
+
     public static void SetUserForSession(User user) {
         UserData.getInstance().setUser(user);
     }

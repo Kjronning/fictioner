@@ -52,4 +52,8 @@ public class User extends RealmObject {
     public boolean isPasswordCorrect(String password) {
         return this.password.equals(password);
     }
+
+    public Book getCurrentBook(){
+        return getBooks().where().contains("id", currentBookId).findFirst();
+    }
 }
