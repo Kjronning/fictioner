@@ -3,6 +3,7 @@ package se.hkr.fictioner.model.data_management;
 import android.content.Context;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import se.hkr.fictioner.model.data_classes.Chapter;
@@ -24,8 +25,21 @@ class LocalDataSource {
         return Realm.getDefaultInstance();
     }
 
-    static <T extends RealmObject> RealmResults<T> GetItemsFromCurrentBook(Class itemClass) {
-        return GetInstance().where(itemClass).equalTo("book.id", UserData.getInstance().getUser().getCurrentBookId()).findAll();
+    static RealmList GetItemsFromCurrentBook(String type) {
+        switch(type){
+            case "character":
+                return UserData.getInstance().getUser().getCurrentBook().getCharacters();
+            case "event":
+                return UserData.getInstance().getUser().getCurrentBook().getEvents();
+            case "location":
+                return UserData.getInstance().getUser().getCurrentBook().getLocations();
+            case "chapter":
+                return UserData.getInstance().getUser().getCurrentBook().getChapters();
+            case "note":
+                return UserData.getInstance().getUser().getCurrentBook().getNotes();
+            default:
+                return null;
+        }
     }
 
     static User GetUserById(String username){

@@ -2,10 +2,13 @@ package se.hkr.fictioner.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import se.hkr.fictioner.R;
+import se.hkr.fictioner.bottom_navigation.BottomNavigationActivity;
 import se.hkr.fictioner.databinding.MainActivityBinding;
 import se.hkr.fictioner.model.user_credentials.UserData;
 
@@ -32,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
     @Override
     public void changeScreen() {
         makeToast("logged in!");
+        Intent intent = new Intent(this, BottomNavigationActivity.class);
+        startActivity(intent);
         //Change the screen to BottomNavigationActivity
     }
-
 }

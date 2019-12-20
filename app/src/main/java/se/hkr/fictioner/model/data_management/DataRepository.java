@@ -2,6 +2,7 @@ package se.hkr.fictioner.model.data_management;
 
 import android.content.Context;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import se.hkr.fictioner.model.user_credentials.PermanentUserData;
@@ -10,9 +11,9 @@ import se.hkr.fictioner.model.data_classes.User;
 
 public class DataRepository {
 
-    public static <T extends RealmObject> RealmResults<T> GetItemsFromCurrentBook(Class itemClass) {
+    public static RealmList GetItemsFromCurrentBook(String type) {
         SyncDataSources();
-        return LocalDataSource.GetItemsFromCurrentBook(itemClass);
+        return LocalDataSource.GetItemsFromCurrentBook(type);
     }
 
     public static void InitializeDataSources(Context context) {
@@ -33,6 +34,7 @@ public class DataRepository {
 
     public static void SetUserForSession(User user) {
         UserData.getInstance().setUser(user);
+        SaveUserData(user);
     }
 
     public static PermanentUserData GetSavedUserData() {

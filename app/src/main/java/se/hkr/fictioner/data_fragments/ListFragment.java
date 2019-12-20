@@ -1,39 +1,35 @@
-package se.hkr.fictioner.list_fragment;
+package se.hkr.fictioner.data_fragments;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmList;
-import io.realm.RealmObject;
 import io.realm.RealmRecyclerViewAdapter;
-import io.realm.RealmResults;
 import se.hkr.fictioner.R;
 
-public class ListFragment <T extends RealmObject> implements ListFragmentContract.ContractView {
-    private ListFragmentPresenter<T> presenter;
-    private MyAdapter<T> adapter;
-
-    public ListFragment(Class<T> tClass){
-        //create that shit?
-        presenter = new ListFragmentPresenter<T>(this);
-        adapter = new MyAdapter<>(null, true);
-        presenter.fetchRealmObjectList(tClass);
-    }
-
+public abstract class ListFragment extends Fragment implements ListFragmentContract.ContractView {
+    private MyAdapter adapter;
 
     @Override
-    public void setListItems(RealmResults items) {
+    public void setListItems(RealmList items) {
         adapter.updateData(items);
+    }
+
+    @Override
+    public void setPresenter(ListFragmentContract.Presenter presenter) {
+
     }
 }
 
-class MyAdapter<T extends RealmObject> extends RealmRecyclerViewAdapter {
+class MyAdapter extends RealmRecyclerViewAdapter {
     MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
     }
