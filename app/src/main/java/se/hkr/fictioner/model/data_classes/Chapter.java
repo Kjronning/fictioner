@@ -2,11 +2,34 @@ package se.hkr.fictioner.model.data_classes;
 
 import java.util.Map;
 
-public class Chapter extends BookData {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Chapter extends RealmObject {
 
     private String name;
     private String body;
 
+    @PrimaryKey
+    private String documentName;
+    private Book book;
+
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
     public Chapter(){}
 
     public Chapter(Map<String, Object> map){

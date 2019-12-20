@@ -12,5 +12,7 @@ public interface MainContract {
         void handleLoginButtonPress(View view);
 
         void handleLoggedIn();
+
+        void handleRegisterButtonPress(View view);
     }
 }

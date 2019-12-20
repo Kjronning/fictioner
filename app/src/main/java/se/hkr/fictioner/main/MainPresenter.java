@@ -35,7 +35,7 @@ public class MainPresenter implements MainContract.Presenter{
         //Set UserData to login user, fetch current book from database.
         User user = DataRepository.GetUserFromDataSource(username, password);
         if(user != null){
-            DataRepository.SetUser(user);
+            DataRepository.SetUserForSession(user);
             contractView.changeScreen();
         }else{
             contractView.makeToast("User not found");
@@ -45,5 +45,14 @@ public class MainPresenter implements MainContract.Presenter{
     @Override
     public void handleLoggedIn() {
         contractView.changeScreen();
+    }
+
+    @Override
+    public void handleRegisterButtonPress(View view){
+        if (DataRepository.UserAlreadyExists(username)){
+            contractView.makeToast("User already exists");
+        }else{
+            DataRepository.CreateNewUser(new User(username,password));
+        }
     }
 }

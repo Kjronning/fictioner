@@ -4,7 +4,8 @@ import android.content.Context;
 
 import io.realm.RealmObject;
 import io.realm.RealmResults;
-import se.hkr.fictioner.model.UserData;
+import se.hkr.fictioner.model.user_credentials.PermanentUserData;
+import se.hkr.fictioner.model.user_credentials.UserData;
 import se.hkr.fictioner.model.data_classes.User;
 
 public class DataRepository {
@@ -18,10 +19,6 @@ public class DataRepository {
         LocalDataSource.Initialize(context);
     }
 
-    public static UserData GetUserData() {
-        return LocalDataSource.GetInstance().where(UserData.class).findFirst();
-    }
-
     private static void SyncDataSources(){
         //TODO: Implement method when Remote database is setup.
     }
@@ -30,7 +27,23 @@ public class DataRepository {
         return LocalDataSource.FindUsernameAndPassword(username, password);
     }
 
-    public static void SetUser(User user) {
+    public static void SetUserForSession(User user) {
         UserData.getInstance().setUser(user);
+    }
+
+    public static PermanentUserData GetSavedUserData() {
+        return LocalDataSource.GetPermanentUserData();
+    }
+
+    public static boolean loggedIn() {
+        return LocalDataSource.IsPermanentUserData();
+    }
+
+    public static boolean UserAlreadyExists(String username) {
+        return LocalDataSource.IsUserInDatabase(username);
+    }
+
+    public static void CreateNewUser(User user) {
+        LocalDataSource.AddUserToDatabase(user);
     }
 }

@@ -1,16 +1,38 @@
 package se.hkr.fictioner.model.data_classes;
 
-import java.util.Map;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class Note extends BookData {
+public class Note extends RealmObject {
 
     private String body;
+    @PrimaryKey
+    private String documentName;
+    private String name;
+    private Book book;
 
-    public Note(){}
+    public String getName() {
+        return name;
+    }
 
-    public Note(Map<String, Object> map){
-        super(map);
-        this.body = (String)map.get("body");
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getBody() {
@@ -21,10 +43,4 @@ public class Note extends BookData {
         this.body = body;
     }
 
-    @Override
-    Map<String,Object> parseToDocumentMap() {
-        Map<String, Object> map = super.parseToDocumentMap();
-        map.put("body", body);
-        return map;
-    }
 }

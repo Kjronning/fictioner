@@ -14,6 +14,14 @@ public class Book extends RealmObject {
     private RealmList<Location> locations;
     private RealmList<Note> notes;
 
+    public Book(){
+        chapters = new RealmList<>();
+        characters = new RealmList<>();
+        events = new RealmList<>();
+        locations = new RealmList<>();
+        notes = new RealmList<>();
+    }
+
     public String getId() {
         return id;
     }
