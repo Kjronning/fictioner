@@ -12,9 +12,16 @@ public class LocationListFragmentPresenter implements ListFragmentContract.Prese
 
     public LocationListFragmentPresenter(ListFragmentContract.ContractView contractView) {
         this.contractView = contractView;
+        fetchObjectListFromCurrentBook();
     }
     @Override
     public void fetchObjectListFromCurrentBook() {
         listData = DataRepository.GetItemsFromCurrentBook("location");
+    }
+
+    @Override
+    public void sendListDataToAdapter() {
+        System.out.println(listData);
+        //contractView.setListItems(listData);
     }
 }

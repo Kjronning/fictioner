@@ -11,13 +11,10 @@ import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 
 import se.hkr.fictioner.R;
-import se.hkr.fictioner.data_fragments.chapter_fragment.ChapterListFragment;
+import se.hkr.fictioner.data_fragments.ListFragment;
 import se.hkr.fictioner.data_fragments.chapter_fragment.ChapterListFragmentPresenter;
-import se.hkr.fictioner.data_fragments.character_fragment.CharacterListFragment;
 import se.hkr.fictioner.data_fragments.character_fragment.CharacterListFragmentPresenter;
-import se.hkr.fictioner.data_fragments.event_fragment.EventListFragment;
 import se.hkr.fictioner.data_fragments.event_fragment.EventListFragmentPresenter;
-import se.hkr.fictioner.data_fragments.location_fragment.LocationListFragment;
 import se.hkr.fictioner.data_fragments.location_fragment.LocationListFragmentPresenter;
 import se.hkr.fictioner.home_fragment.HomeFragment;
 import se.hkr.fictioner.home_fragment.HomeFragmentPresenter;
@@ -31,10 +28,10 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     private EventListFragmentPresenter eventListFragmentPresenter;
     private HomeFragmentPresenter homeFragmentPresenter;
 
-    private LocationListFragment locationListFragment;
-    private CharacterListFragment characterListFragment;
-    private ChapterListFragment chapterListFragment;
-    private EventListFragment eventListFragment;
+    private ListFragment locationListFragment;
+    private ListFragment characterListFragment;
+    private ListFragment chapterListFragment;
+    private ListFragment eventListFragment;
     private HomeFragment homeFragment;
     private Fragment currentFragment;
 
@@ -84,10 +81,10 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
 
     private void setFragments(){
         homeFragment = new HomeFragment();
-        chapterListFragment = new ChapterListFragment();
-        characterListFragment = new CharacterListFragment();
-        locationListFragment = new LocationListFragment();
-        eventListFragment = new EventListFragment();
+        chapterListFragment = new ListFragment(R.layout.chapter_fragment, R.id.chapter_recycler_view);
+        characterListFragment = new ListFragment(R.layout.character_fragment,R.id.character_recycler_view);
+        locationListFragment = new ListFragment(R.layout.location_fragment, R.id.location_recycler_view);
+        eventListFragment = new ListFragment(R.layout.event_fragment, R.id.event_recycler_view);
         currentFragment = homeFragment;
         getSupportFragmentManager().beginTransaction().add(R.id.main_container, chapterListFragment, "chapters").hide(chapterListFragment).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.main_container, characterListFragment, "characters").hide(characterListFragment).commit();
@@ -105,7 +102,15 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         setFragments();
         setPresenters();
         attachPresentersToFragments();
+        setDataToFragments();
         presenter = new BottomNavigationPresenter(this);
+    }
+
+    private void setDataToFragments() {
+        locationListFragmentPresenter.sendListDataToAdapter();
+        eventListFragmentPresenter.sendListDataToAdapter();
+        chapterListFragmentPresenter.sendListDataToAdapter();
+        characterListFragmentPresenter.sendListDataToAdapter();
     }
 
     @Override

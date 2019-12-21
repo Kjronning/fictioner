@@ -12,9 +12,16 @@ public class ChapterListFragmentPresenter implements ListFragmentContract.Presen
 
     public ChapterListFragmentPresenter(ListFragmentContract.ContractView contractView) {
         this.contractView = contractView;
+        fetchObjectListFromCurrentBook();
     }
     @Override
     public void fetchObjectListFromCurrentBook() {
         listData = DataRepository.GetItemsFromCurrentBook("chapter");
+        System.out.println("Are chapters managed? ..." + listData.isManaged());
+    }
+
+    @Override
+    public void sendListDataToAdapter() {
+        contractView.setListItems(listData);
     }
 }

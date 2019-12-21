@@ -1,24 +1,36 @@
 package se.hkr.fictioner.data_fragments.character_fragment;
 
-
-import android.provider.ContactsContract;
-
 import io.realm.RealmList;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
 import se.hkr.fictioner.model.data_management.DataRepository;
-import se.hkr.fictioner.model.user_credentials.UserData;
 
 public class CharacterListFragmentPresenter implements ListFragmentContract.Presenter {
 
     private ListFragmentContract.ContractView contractView;
     private RealmList<Character> listData;
 
+    public RealmList<Character> getListData() {
+        return listData;
+    }
+
+    public void setListData(RealmList<Character> listData) {
+        this.listData = listData;
+    }
+
     public CharacterListFragmentPresenter(ListFragmentContract.ContractView contractView) {
         this.contractView = contractView;
+        fetchObjectListFromCurrentBook();
     }
 
     @Override
     public void fetchObjectListFromCurrentBook() {
         listData = DataRepository.GetItemsFromCurrentBook("character");
+    }
+
+    @Override
+    public void sendListDataToAdapter() {
+
+        System.out.println(listData);
+        //contractView.setListItems(listData);
     }
 }

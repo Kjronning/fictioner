@@ -10,5 +10,6 @@ public interface ListFragmentContract {
     }
     interface Presenter {
         void fetchObjectListFromCurrentBook();
+        void sendListDataToAdapter();
     }
 }

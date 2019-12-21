@@ -12,10 +12,18 @@ public class EventListFragmentPresenter  implements ListFragmentContract.Present
 
     public EventListFragmentPresenter(ListFragmentContract.ContractView contractView) {
         this.contractView = contractView;
+        fetchObjectListFromCurrentBook();
     }
     @Override
     public void fetchObjectListFromCurrentBook() {
         listData = DataRepository.GetItemsFromCurrentBook("event");
 
+    }
+
+    @Override
+    public void sendListDataToAdapter() {
+
+        System.out.println(listData);
+        //contractView.setListItems(listData);
     }
 }

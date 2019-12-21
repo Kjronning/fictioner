@@ -3,6 +3,7 @@ package se.hkr.fictioner.model.data_classes;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class Book extends RealmObject {
     @PrimaryKey
@@ -14,12 +15,11 @@ public class Book extends RealmObject {
     private RealmList<Location> locations;
     private RealmList<Note> notes;
 
-    public Book(){
-        chapters = new RealmList<>();
-        characters = new RealmList<>();
-        events = new RealmList<>();
-        locations = new RealmList<>();
-        notes = new RealmList<>();
+    public Book(){}
+
+    public Book(String id, String userId){
+        this.id = id;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -39,6 +39,10 @@ public class Book extends RealmObject {
     }
 
     public RealmList<Chapter> getChapters() {
+        if(chapters==null){
+            chapters = new RealmList<>();
+            DataRepository.AddListToDatabase(chapters);
+        }
         return chapters;
     }
 
@@ -47,6 +51,10 @@ public class Book extends RealmObject {
     }
 
     public RealmList<Character> getCharacters() {
+        if(characters==null){
+            characters = new RealmList<>();
+            DataRepository.AddListToDatabase(characters);
+        }
         return characters;
     }
 
@@ -55,6 +63,10 @@ public class Book extends RealmObject {
     }
 
     public RealmList<Event> getEvents() {
+        if(events==null){
+            events = new RealmList<>();
+            DataRepository.AddListToDatabase(events);
+        }
         return events;
     }
 
@@ -63,14 +75,23 @@ public class Book extends RealmObject {
     }
 
     public RealmList<Location> getLocations() {
+        if(locations==null){
+            locations = new RealmList<>();
+            DataRepository.AddListToDatabase(locations);
+        }
         return locations;
     }
 
     public void setLocations(RealmList<Location> locations) {
+
         this.locations = locations;
     }
 
     public RealmList<Note> getNotes() {
+        if(notes==null){
+            notes = new RealmList<>();
+            DataRepository.AddListToDatabase(notes);
+        }
         return notes;
     }
 

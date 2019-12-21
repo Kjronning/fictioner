@@ -6,6 +6,7 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import se.hkr.fictioner.model.data_classes.Book;
 import se.hkr.fictioner.model.data_classes.Chapter;
 import se.hkr.fictioner.model.data_classes.Character;
 import se.hkr.fictioner.model.data_classes.Event;
@@ -125,5 +126,93 @@ class LocalDataSource {
 
     static boolean IsUserInDatabase(String username) {
        return GetInstance().where(User.class).contains("id",username).count() == 1;
+    }
+
+    static void BeginTransaction() {
+        GetInstance().beginTransaction();
+    }
+
+    static void SaveItem(RealmObject object) {
+        GetInstance().copyToRealm(object);
+    }
+
+    static void CommitTransaction(){
+        GetInstance().commitTransaction();
+    }
+
+    static void AddBookToCurrentUser(Book book) {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        UserData.getInstance().getUser().getBooks().add(book);
+        realm.commitTransaction();
+
+    }
+
+    static Book CreateBook(String id, String userId) {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Book object = new Book(id,userId);
+        Book realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+
+    static Character CreateCharacter() {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Character object = new Character();
+        Character realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+
+    static Chapter CreateChapter() {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Chapter object = new Chapter();
+        Chapter realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+    static Event CreateEvent() {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Event object = new Event();
+        Event realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+    static Location CreateLocation() {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Location object = new Location();
+        Location realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+    static Note CreateNote() {
+        Realm realm = GetInstance();
+        realm.beginTransaction();
+        Note object = new Note();
+        Note realmObject = realm.copyToRealm(object);
+        realm.commitTransaction();
+        return realmObject;
+    }
+
+    static void AddListsToDatabase(RealmList[] lists) {
+        for (RealmList list : lists){
+            AddListToDatabase(list);
+        }
+    }
+
+    static void AddListToDatabase(RealmList list){
+        GetInstance().beginTransaction();
+        GetInstance().copyToRealm(list);
+        GetInstance().commitTransaction();
     }
 }

@@ -3,8 +3,12 @@ package se.hkr.fictioner.model.data_management;
 import android.content.Context;
 
 import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.RealmResults;
+import se.hkr.fictioner.model.data_classes.Book;
+import se.hkr.fictioner.model.data_classes.Chapter;
+import se.hkr.fictioner.model.data_classes.Character;
+import se.hkr.fictioner.model.data_classes.Event;
+import se.hkr.fictioner.model.data_classes.Location;
+import se.hkr.fictioner.model.data_classes.Note;
 import se.hkr.fictioner.model.user_credentials.PermanentUserData;
 import se.hkr.fictioner.model.user_credentials.UserData;
 import se.hkr.fictioner.model.data_classes.User;
@@ -14,6 +18,38 @@ public class DataRepository {
     public static RealmList GetItemsFromCurrentBook(String type) {
         SyncDataSources();
         return LocalDataSource.GetItemsFromCurrentBook(type);
+    }
+
+    public static Book CreateBook(String id, String userId){
+        return LocalDataSource.CreateBook(id, userId);
+    }
+
+    public static Character CreateCharacter(){
+        return LocalDataSource.CreateCharacter();
+    }
+
+    public static Chapter CreateChapter(){
+        return LocalDataSource.CreateChapter();
+    }
+
+    public static Location CreateLocation(){
+        return LocalDataSource.CreateLocation();
+    }
+
+    public static Event CreateEvent(){
+        return LocalDataSource.CreateEvent();
+    }
+
+    public static Note CreateNote(){
+        return LocalDataSource.CreateNote();
+    }
+
+    public static void BeginTransaction(){
+        LocalDataSource.BeginTransaction();
+    }
+
+    public static void CommitTransaction(){
+        LocalDataSource.CommitTransaction();
     }
 
     public static void InitializeDataSources(Context context) {
@@ -51,5 +87,17 @@ public class DataRepository {
 
     public static void CreateNewUser(User user) {
         LocalDataSource.AddUserToDatabase(user);
+    }
+
+    public static void AddBookToCurrentUser(Book book) {
+        LocalDataSource.AddBookToCurrentUser(book);
+    }
+
+    public static void AddListsToDatabase(RealmList ... lists) {
+        LocalDataSource.AddListsToDatabase(lists);
+    }
+
+    public static void AddListToDatabase(RealmList list){
+        LocalDataSource.AddListToDatabase(list);
     }
 }
