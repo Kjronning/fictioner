@@ -21,7 +21,6 @@ public class LocationListFragmentPresenter implements ListFragmentContract.Prese
 
     @Override
     public void sendListDataToAdapter() {
-        System.out.println(listData);
-        //contractView.setListItems(listData);
+        contractView.setListItems(listData);
     }
 }

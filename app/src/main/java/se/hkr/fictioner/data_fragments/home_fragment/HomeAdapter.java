@@ -1,4 +1,4 @@
-package se.hkr.fictioner.data_fragments;
+package se.hkr.fictioner.data_fragments.home_fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.OrderedRealmCollection;
-import io.realm.RealmModel;
 import io.realm.RealmRecyclerViewAdapter;
 import se.hkr.fictioner.R;
-import se.hkr.fictioner.model.data_classes.Character;
+import se.hkr.fictioner.model.data_classes.Note;
 
-public class MyAdapter extends RealmRecyclerViewAdapter {
-    public MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
+public class HomeAdapter extends RealmRecyclerViewAdapter {
+    public HomeAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
     }
 
-    public MyAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, boolean updateOnModification) {
+    public HomeAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, boolean updateOnModification) {
         super(data, autoUpdate, updateOnModification);
     }
 
@@ -33,7 +32,7 @@ public class MyAdapter extends RealmRecyclerViewAdapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Character currentItem = (Character)getItem(position);
+        Note currentItem = (Note)getItem(position);
         TextView textView = holder.itemView.findViewById(R.id.viewholder_textview);
         if(currentItem==null){
             System.out.println("current item is null");

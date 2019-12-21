@@ -26,16 +26,13 @@ public class CharacterAdapter extends RealmRecyclerViewAdapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Character currentItem = (Character)getItem(position);
-        TextView textView = holder.itemView.findViewById(R.id.viewholder_textview);
-        textView.setText(currentItem != null ? currentItem.getName() : null);
-
     }
 }
 

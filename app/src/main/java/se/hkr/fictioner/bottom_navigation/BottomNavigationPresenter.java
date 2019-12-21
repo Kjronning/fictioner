@@ -51,23 +51,18 @@ public class BottomNavigationPresenter implements BottomNavigationContract.Prese
         switch(tag){
             case "home":
                 DataRepository.AddNoteToCurrentBook();
-                System.out.println("list: " + UserData.getInstance().getUser().getCurrentBook().getNotes().toString());
                 break;
             case "characters":
                 DataRepository.AddCharacterToCurrentBook();
-                System.out.println("list: " + UserData.getInstance().getUser().getCurrentBook().getCharacters().toString());
                 break;
             case "chapters":
                 DataRepository.AddChapterToCurrentBook();
-                System.out.println("list: " + UserData.getInstance().getUser().getCurrentBook().getChapters().toString());
                 break;
             case "events":
                 DataRepository.AddEventToCurrentBook();
-                System.out.println("list: " + UserData.getInstance().getUser().getCurrentBook().getEvents().toString());
                 break;
             case "locations":
                 DataRepository.AddLocationToCurrentBook();
-                System.out.println("list: " + UserData.getInstance().getUser().getCurrentBook().getLocations().toString());
                 break;
         }
     }

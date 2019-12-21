@@ -1,4 +1,4 @@
-package se.hkr.fictioner.home_fragment;
+package se.hkr.fictioner.data_fragments.home_fragment;
 
 public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private HomeFragmentContract.ContractView contractView;

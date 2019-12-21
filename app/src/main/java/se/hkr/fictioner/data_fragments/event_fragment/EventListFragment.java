@@ -6,19 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
-import se.hkr.fictioner.data_fragments.MyAdapter;
 
 public class EventListFragment extends Fragment implements ListFragmentContract.ContractView {
     private EventAdapter adapter;
     private ListFragmentContract.Presenter presenter;
     RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private DividerItemDecoration dividerItemDecoration;
 
     public EventListFragment(){
+        adapter = new EventAdapter(null, true);
     }
 
     @Override
@@ -28,8 +32,12 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
         View view = inflater.inflate(R.layout.event_fragment,
                 container, false);
         recyclerView = view.findViewById(R.id.event_recycler_view);
-        adapter = new EventAdapter(null, true);
         recyclerView.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         return view;
     }
     @Override

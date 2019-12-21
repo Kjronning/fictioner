@@ -7,9 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".bottom_navigation.BottomNavigationActivity"
     tools:showIn="@layout/activity_bottom_navigation"
-    android:padding="1dp"
+    android:paddingHorizontal="40dp"
     android:id="@+id/main_container"
     android:background="@color/colorAccent"
-    android:orientation="vertical">
-
-</LinearLayout>
+    android:orientation="vertical"/>

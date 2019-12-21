@@ -1,4 +1,4 @@
-package se.hkr.fictioner.home_fragment;
+package se.hkr.fictioner.data_fragments.home_fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import se.hkr.fictioner.R;
 

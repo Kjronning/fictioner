@@ -23,7 +23,6 @@ public class EventListFragmentPresenter  implements ListFragmentContract.Present
     @Override
     public void sendListDataToAdapter() {
 
-        System.out.println(listData);
-        //contractView.setListItems(listData);
+        contractView.setListItems(listData);
     }
 }
