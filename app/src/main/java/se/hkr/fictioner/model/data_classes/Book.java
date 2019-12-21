@@ -1,5 +1,7 @@
 package se.hkr.fictioner.model.data_classes;
 
+import java.util.UUID;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -15,10 +17,12 @@ public class Book extends RealmObject {
     private RealmList<Location> locations;
     private RealmList<Note> notes;
 
-    public Book(){}
+    public Book(){
+        id = UUID.randomUUID().toString();
+    }
 
-    public Book(String id, String userId){
-        this.id = id;
+    public Book(String userId){
+        this();
         this.userId = userId;
     }
 

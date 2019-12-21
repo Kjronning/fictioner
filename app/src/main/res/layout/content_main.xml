@@ -10,6 +10,6 @@
     android:padding="1dp"
     android:id="@+id/main_container"
     android:background="@color/colorAccent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
 </LinearLayout>

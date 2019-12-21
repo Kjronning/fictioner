@@ -14,23 +14,21 @@ import se.hkr.fictioner.data_fragments.ListFragmentContract;
 import se.hkr.fictioner.data_fragments.MyAdapter;
 
 public class EventListFragment extends Fragment implements ListFragmentContract.ContractView {
-    private MyAdapter adapter;
-    private int resource;
+    private EventAdapter adapter;
     private ListFragmentContract.Presenter presenter;
     RecyclerView recyclerView;
 
-    public EventListFragment(int resource){
-        this.resource = resource;
+    public EventListFragment(){
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(resource,
+        View view = inflater.inflate(R.layout.event_fragment,
                 container, false);
-        recyclerView = view.findViewById(R.id.character_recycler_view);
-        adapter = new MyAdapter(null, true);
+        recyclerView = view.findViewById(R.id.event_recycler_view);
+        adapter = new EventAdapter(null, true);
         recyclerView.setAdapter(adapter);
         return view;
     }

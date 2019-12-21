@@ -30,7 +30,9 @@ public class Chapter extends RealmObject {
     public void setBook(Book book) {
         this.book = book;
     }
-    public Chapter(){}
+    public Chapter(){
+        name = "new chapter";
+    }
 
     public Chapter(Map<String, Object> map){
         //super(map);

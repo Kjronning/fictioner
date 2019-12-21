@@ -9,19 +9,19 @@
     <item
         android:id="@+id/navigation_character"
         android:icon="@drawable/ic_character_black_24dp"
-        android:title="@string/title_character" />
+        android:title="@string/title_characters" />
 
     <item
         android:id="@+id/navigation_book"
         android:icon="@drawable/ic_book_black_24dp"
-        android:title="@string/title_book" />
+        android:title="@string/title_chapters" />
 
     <item
         android:id="@+id/navigation_location"
         android:icon="@drawable/ic_location_on_black_24dp"
-        android:title="@string/title_location" />
+        android:title="@string/title_locations" />
     <item
         android:id="@+id/navigation_event"
         android:icon="@drawable/ic_event_black_24dp"
-        android:title="@string/title_event" />
+        android:title="@string/title_events" />
 </menu>

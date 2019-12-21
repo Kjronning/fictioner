@@ -34,16 +34,14 @@ public class ListFragment extends Fragment implements ListFragmentContract.Contr
         recyclerView = view.findViewById(recyclerViewResource);
         recyclerView.setAdapter(adapter);
         System.out.println(recyclerView.getAdapter());
-
         //recyclerView.setLayoutManager(new MyLayoutManager());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         return view;
     }
     @Override
     public void setListItems(RealmList items) {
         System.out.println("is adapter created?" + (adapter!=null));
-        adapter.updateData(items.where().findAll());
+        adapter.updateData(items);
     }
 
     @Override

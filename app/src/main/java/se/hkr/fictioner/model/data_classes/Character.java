@@ -27,7 +27,10 @@ public class Character extends RealmObject {
     public void setBook(Book book) {
         this.book = book;
     }
-    public Character(){}
+
+    public Character(){
+        name = "new character";
+    }
 
     public String getName() {
         return name;

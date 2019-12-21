@@ -29,8 +29,6 @@ public class CharacterListFragmentPresenter implements ListFragmentContract.Pres
 
     @Override
     public void sendListDataToAdapter() {
-
-        System.out.println(listData);
-        //contractView.setListItems(listData);
+        contractView.setListItems(listData);
     }
 }

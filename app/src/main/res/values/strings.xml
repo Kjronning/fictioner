@@ -4,10 +4,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_character">Character</string>
-    <string name="title_book">Book</string>
-    <string name="title_event">Event</string>
-    <string name="title_location">Location</string>
+    <string name="title_characters">Characters</string>
+    <string name="title_chapters">Chapters</string>
+    <string name="title_events">Events</string>
+    <string name="title_locations">Locations</string>
     <string name="email">E-mail address</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>

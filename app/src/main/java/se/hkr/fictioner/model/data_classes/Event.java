@@ -10,6 +10,10 @@ public class Event extends RealmObject {
     private String documentName;
     private Book book;
 
+    public Event(){
+        name = "new event";
+    }
+
 
     public String getDocumentName() {
         return documentName;

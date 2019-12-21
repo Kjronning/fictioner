@@ -148,10 +148,10 @@ class LocalDataSource {
 
     }
 
-    static Book CreateBook(String id, String userId) {
+    static Book CreateBook(String userId) {
         Realm realm = GetInstance();
         realm.beginTransaction();
-        Book object = new Book(id,userId);
+        Book object = new Book(userId);
         Book realmObject = realm.copyToRealm(object);
         realm.commitTransaction();
         return realmObject;

@@ -1,5 +1,7 @@
 package se.hkr.fictioner.bottom_navigation;
 
+import android.view.View;
+
 public interface BottomNavigationContract {
 
     interface ContractView{
@@ -8,12 +10,23 @@ public interface BottomNavigationContract {
         void switchToEventFragment();
         void switchToLocationFragment();
         void switchToHomeFragment();
-    }
-    interface Presenter{
+        void setFabIcon(int resource);
+        }
+    interface Presenter {
         void handleCharacterButtonPress();
+
         void handleChapterButtonPress();
+
         void handleEventButtonPress();
+
         void handleLocationButtonPress();
+
         void handleHomeButtonPress();
+
+        void setButtonIconResource(int iconResource);
+
+        void handleAddButtonPress(View view);
+
+        void setTag(String tag);
     }
 }

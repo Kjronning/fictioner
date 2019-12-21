@@ -15,23 +15,22 @@ import se.hkr.fictioner.data_fragments.MyAdapter;
 import se.hkr.fictioner.model.data_classes.Character;
 
 public class ChapterListFragment extends Fragment implements ListFragmentContract.ContractView {
-    private MyAdapter adapter;
-    private int resource;
+    private ChapterAdapter adapter;
     private ListFragmentContract.Presenter presenter;
     RecyclerView recyclerView;
 
-    public ChapterListFragment(int resource){
-        this.resource = resource;
+    public ChapterListFragment(){
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(resource,
+        View view = inflater.inflate(R.layout.chapter_fragment,
                 container, false);
-        recyclerView = view.findViewById(R.id.character_recycler_view);
-        adapter = new MyAdapter<Character>(null, true);
+        recyclerView = view.findViewById(R.id.chapter_recycler_view);
+        adapter = new ChapterAdapter(null, true);
         recyclerView.setAdapter(adapter);
         return view;
     }

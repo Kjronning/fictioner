@@ -3,12 +3,14 @@ package se.hkr.fictioner.bottom_navigation;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
+import android.view.View;
 
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragment;
@@ -20,6 +22,9 @@ import se.hkr.fictioner.home_fragment.HomeFragment;
 import se.hkr.fictioner.home_fragment.HomeFragmentPresenter;
 
 public class BottomNavigationActivity extends AppCompatActivity implements BottomNavigationContract.ContractView {
+
+
+    FloatingActionButton fab;
 
     private BottomNavigationContract.Presenter presenter;
     private LocationListFragmentPresenter locationListFragmentPresenter;
@@ -44,18 +49,23 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     presenter.handleHomeButtonPress();
+                    presenter.setButtonIconResource(R.drawable.ic_home_black_24dp);
                     return true;
                 case R.id.navigation_event:
                     presenter.handleEventButtonPress();
+                    presenter.setButtonIconResource(R.drawable.ic_event_black_24dp);
                     return true;
                 case R.id.navigation_book:
                     presenter.handleChapterButtonPress();
+                    presenter.setButtonIconResource(R.drawable.ic_book_black_24dp);
                     return true;
                 case R.id.navigation_character:
                     presenter.handleCharacterButtonPress();
+                    presenter.setButtonIconResource(R.drawable.ic_character_black_24dp);
                     return true;
                 case R.id.navigation_location:
                     presenter.handleLocationButtonPress();
+                    presenter.setButtonIconResource(R.drawable.ic_location_on_black_24dp);
                     return true;
             }
             return false;
@@ -99,11 +109,18 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         setContentView(R.layout.activity_bottom_navigation);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        fab = findViewById(R.id.add_button);
         setFragments();
         setPresenters();
         attachPresentersToFragments();
         setDataToFragments();
         presenter = new BottomNavigationPresenter(this);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.handleAddButtonPress(v);
+            }
+        });
     }
 
     private void setDataToFragments() {
@@ -126,7 +143,6 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     @Override
     public void switchToEventFragment() {
         switchToFragment(eventListFragment);
-
     }
 
     @Override
@@ -141,8 +157,14 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
 
     }
 
+    @Override
+    public void setFabIcon(int resource){
+        fab.setImageResource(resource);
+    }
+
     private void switchToFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().hide(currentFragment).show(fragment).commit();
         currentFragment = fragment;
+        presenter.setTag(fragment.getTag());
     }
 }

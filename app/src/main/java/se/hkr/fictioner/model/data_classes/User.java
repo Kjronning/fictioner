@@ -1,7 +1,5 @@
 package se.hkr.fictioner.model.data_classes;
 
-import android.provider.ContactsContract;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -61,7 +59,7 @@ public class User extends RealmObject {
 
     public Book getCurrentBook(){
         if(books.isEmpty()){
-            Book firstBook = DataRepository.CreateBook("1", id);
+            Book firstBook = DataRepository.CreateBook(id);
             DataRepository.AddBookToCurrentUser(new Book());
             DataRepository.BeginTransaction();
             currentBookId = firstBook.getId();

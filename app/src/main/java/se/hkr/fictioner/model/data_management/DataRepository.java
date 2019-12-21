@@ -20,8 +20,8 @@ public class DataRepository {
         return LocalDataSource.GetItemsFromCurrentBook(type);
     }
 
-    public static Book CreateBook(String id, String userId){
-        return LocalDataSource.CreateBook(id, userId);
+    public static Book CreateBook(String userId){
+        return LocalDataSource.CreateBook(userId);
     }
 
     public static Character CreateCharacter(){
@@ -99,5 +99,25 @@ public class DataRepository {
 
     public static void AddListToDatabase(RealmList list){
         LocalDataSource.AddListToDatabase(list);
+    }
+
+    public static void AddNoteToCurrentBook() {
+        LocalDataSource.AddNoteToCurrentBook(new Note());
+    }
+
+    public static void AddCharacterToCurrentBook() {
+        LocalDataSource.AddCharacterToCurrentBook(new Character());
+    }
+
+    public static void AddChapterToCurrentBook() {
+        LocalDataSource.AddChapterToCurrentBook(new Chapter());
+    }
+
+    public static void AddEventToCurrentBook() {
+        LocalDataSource.AddEventToCurrentBook(new Event());
+    }
+
+    public static void AddLocationToCurrentBook() {
+        LocalDataSource.AddLocationToCurrentBook(new Location());
     }
 }

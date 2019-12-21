@@ -11,6 +11,9 @@ public class Location extends RealmObject {
     private String documentName;
     private Book book;
 
+    public Location(){
+        name = "new location";
+    }
 
     public String getDocumentName() {
         return documentName;

@@ -11,6 +11,9 @@ public class Note extends RealmObject {
     private String name;
     private Book book;
 
+    public Note(){
+        name = "new note";
+    }
     public String getName() {
         return name;
     }
@@ -41,6 +44,11 @@ public class Note extends RealmObject {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    @Override
+    public String toString(){
+        return "name: " + name + ", id: " + documentName;
     }
 
 }
