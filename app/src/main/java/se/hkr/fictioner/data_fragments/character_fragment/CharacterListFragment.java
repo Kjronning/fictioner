@@ -37,7 +37,6 @@ public class CharacterListFragment extends Fragment implements ListFragmentContr
         recyclerView.setLayoutManager(linearLayoutManager);
         dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 linearLayoutManager.getOrientation());
-        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
         return view;
     }
