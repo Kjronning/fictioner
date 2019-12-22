@@ -19,7 +19,6 @@ public class CharacterListFragment extends Fragment implements ListFragmentContr
     private ListFragmentContract.Presenter presenter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
 
     public CharacterListFragment(){
         adapter = new CharacterAdapter(null, true);
@@ -35,9 +34,6 @@ public class CharacterListFragment extends Fragment implements ListFragmentContr
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
         return view;
     }
     @Override

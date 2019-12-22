@@ -19,7 +19,6 @@ public class LocationListFragment extends Fragment implements ListFragmentContra
     private ListFragmentContract.Presenter presenter;
     RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
 
     public LocationListFragment(){
         adapter = new LocationAdapter(null, true);
@@ -35,9 +34,6 @@ public class LocationListFragment extends Fragment implements ListFragmentContra
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
         return view;
     }
     @Override

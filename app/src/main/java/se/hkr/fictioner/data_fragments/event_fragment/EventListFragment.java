@@ -19,7 +19,6 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
     private ListFragmentContract.Presenter presenter;
     RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
 
     public EventListFragment(){
         adapter = new EventAdapter(null, true);
@@ -35,9 +34,6 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
         return view;
     }
     @Override
