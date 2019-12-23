@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import se.hkr.fictioner.R;
@@ -23,8 +25,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
         presenter = new MainPresenter(this);
         MainActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
         binding.setPresenter(presenter);
-        if (UserData.getInstance().getUser() != null)
-            presenter.handleLoggedIn();
+        TextView textView = findViewById(R.id.login_title_textview);
+        Typeface typeface = getResources().getFont(R.font.grand_hotel);
+        textView.setTypeface(typeface);
+        //TODO: make this method call a new method in presenter
+        if (UserData.getInstance().getUser() != null) presenter.handleLoggedIn();
     }
 
     @Override

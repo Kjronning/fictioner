@@ -120,4 +120,16 @@ public class DataRepository {
     public static void AddLocationToCurrentBook() {
         LocalDataSource.AddLocationToCurrentBook(new Location());
     }
+
+    public static String getCurrentBookTitle() {
+        return UserData.getInstance().getUser().getCurrentBook().getName();
+    }
+
+    public static void ChangeCurrentBook(Book book) {
+        LocalDataSource.ChangeCurrentBook(book);
+    }
+
+    public static void ChangeCurrentBookName(String newTitle) {
+        LocalDataSource.ChangeCurrentBookName(newTitle);
+    }
 }

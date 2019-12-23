@@ -215,4 +215,12 @@ class LocalDataSource {
         GetInstance().copyToRealm(list);
         GetInstance().commitTransaction();
     }
+
+    static void ChangeCurrentBook(Book book) {
+        UserData.getInstance().getUser().setCurrentBook(book);
+    }
+
+    static void ChangeCurrentBookName(String newTitle) {
+        UserData.getInstance().getUser().getCurrentBook().setName(newTitle);
+    }
 }

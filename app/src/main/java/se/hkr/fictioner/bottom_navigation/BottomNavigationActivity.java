@@ -1,16 +1,19 @@
 package se.hkr.fictioner.bottom_navigation;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.chapter_fragment.ChapterListFragment;
@@ -23,11 +26,13 @@ import se.hkr.fictioner.data_fragments.location_fragment.LocationListFragment;
 import se.hkr.fictioner.data_fragments.location_fragment.LocationListFragmentPresenter;
 import se.hkr.fictioner.data_fragments.home_fragment.HomeFragment;
 import se.hkr.fictioner.data_fragments.home_fragment.HomeFragmentPresenter;
+import se.hkr.fictioner.model.data_management.DataRepository;
 
 public class BottomNavigationActivity extends AppCompatActivity implements BottomNavigationContract.ContractView {
 
 
     FloatingActionButton fab;
+    TextView bookTitleTextView;
 
     private BottomNavigationContract.Presenter presenter;
     private LocationListFragmentPresenter locationListFragmentPresenter;
@@ -117,7 +122,9 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         setPresenters();
         attachPresentersToFragments();
         setDataToFragments();
+        setupActionBar();
         presenter = new BottomNavigationPresenter(this);
+        presenter.changeBookTitle();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,11 +133,26 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         });
     }
 
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setCustomView(R.layout.action_bar);
+            bookTitleTextView =  actionBar.getCustomView().findViewById(R.id.book_title);
+            bookTitleTextView.setText(DataRepository.getCurrentBookTitle());
+            Typeface typeface = getResources().getFont(R.font.grand_hotel);
+            ((TextView)actionBar.getCustomView().findViewById(R.id.actionbar_title)).setTypeface(typeface);
+        }
+    }
+
     private void setDataToFragments() {
         locationListFragmentPresenter.sendListDataToAdapter();
         eventListFragmentPresenter.sendListDataToAdapter();
         chapterListFragmentPresenter.sendListDataToAdapter();
         characterListFragmentPresenter.sendListDataToAdapter();
+        homeFragmentPresenter.sendListDataToAdapter();
+        homeFragmentPresenter.sendListDataToSpinnerAdapter();
     }
 
     @Override
@@ -163,6 +185,12 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     @Override
     public void setFabIcon(int resource){
         fab.setImageResource(resource);
+    }
+
+    @Override
+    public void changeBookTitleText(String currentBookTitle) {
+        if(bookTitleTextView!=null)
+        bookTitleTextView.setText(currentBookTitle);
     }
 
     private void switchToFragment(Fragment fragment){

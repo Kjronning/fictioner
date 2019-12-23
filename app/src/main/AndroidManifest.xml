@@ -13,10 +13,10 @@
         <activity
             android:name=".bottom_navigation.BottomNavigationActivity"
             android:label="@string/title_activity_bottom_navigation"></activity>
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".main.MainActivity"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

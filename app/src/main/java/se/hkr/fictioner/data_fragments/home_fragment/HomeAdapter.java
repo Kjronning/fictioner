@@ -26,19 +26,13 @@ public class HomeAdapter extends RealmRecyclerViewAdapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Note currentItem = (Note)getItem(position);
-        TextView textView = holder.itemView.findViewById(R.id.viewholder_textview);
-        if(currentItem==null){
-            System.out.println("current item is null");
-        }else {
-            textView.setText(currentItem.getName());
-        }
     }
 }
 

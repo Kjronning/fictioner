@@ -10,7 +10,7 @@ public class User extends RealmObject {
     private String id;
     private String password;
     private RealmList<Book> books;
-    private String currentBookId;
+    private Book currentBook;
 
     public User(){    }
 
@@ -43,14 +43,6 @@ public class User extends RealmObject {
         this.books = books;
     }
 
-    public String getCurrentBookId() {
-        return currentBookId;
-    }
-
-    public void setCurrentBookId(String currentBookId) {
-        this.currentBookId = currentBookId;
-    }
-
     public boolean isPasswordCorrect(String password) {
         if(password!=null)
         return this.password.equals(password);
@@ -58,14 +50,17 @@ public class User extends RealmObject {
     }
 
     public Book getCurrentBook(){
-        if(books.isEmpty()){
-            Book firstBook = DataRepository.CreateBook(id);
-            DataRepository.AddBookToCurrentUser(new Book());
-            DataRepository.BeginTransaction();
-            currentBookId = firstBook.getId();
-            DataRepository.CommitTransaction();
-            System.out.println(currentBookId);
+        if (currentBook == null){
+            Book book = DataRepository.CreateBook(id);
+            DataRepository.ChangeCurrentBook(book);
+            DataRepository.AddBookToCurrentUser(currentBook);
         }
-        return getBooks().where().contains("id", currentBookId).findFirst();
+        return currentBook;
+    }
+
+    public void setCurrentBook(Book book) {
+        DataRepository.BeginTransaction();
+        currentBook = book;
+        DataRepository.CommitTransaction();
     }
 }

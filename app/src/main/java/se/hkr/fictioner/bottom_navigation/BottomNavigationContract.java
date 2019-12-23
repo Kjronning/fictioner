@@ -11,7 +11,9 @@ public interface BottomNavigationContract {
         void switchToLocationFragment();
         void switchToHomeFragment();
         void setFabIcon(int resource);
-        }
+
+        void changeBookTitleText(String currentBookTitle);
+    }
     interface Presenter {
         void handleCharacterButtonPress();
 
@@ -28,5 +30,7 @@ public interface BottomNavigationContract {
         void handleAddButtonPress(View view);
 
         void setTag(String tag);
+
+        void changeBookTitle();
     }
 }

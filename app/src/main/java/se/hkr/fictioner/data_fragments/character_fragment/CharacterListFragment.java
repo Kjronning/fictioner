@@ -1,10 +1,12 @@
 package se.hkr.fictioner.data_fragments.character_fragment;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
+import se.hkr.fictioner.databinding.CharacterFragmentBinding;
 
 public class CharacterListFragment extends Fragment implements ListFragmentContract.ContractView {
     private CharacterAdapter adapter;
@@ -28,8 +31,9 @@ public class CharacterListFragment extends Fragment implements ListFragmentContr
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.character_fragment,
-                container, false);
+        CharacterFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.character_fragment,container,false);
+        View view = binding.getRoot();
+        binding.setPresenter(presenter);
         recyclerView = view.findViewById(R.id.character_recycler_view);
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());

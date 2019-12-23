@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
+            name="homeFragmentPresenter"
+            type="se.hkr.fictioner.data_fragments.home_fragment.HomeFragmentPresenter" />
+
+        <variable
             name="presenter"
-            type="se.hkr.fictioner.data_fragments.character_fragment.CharacterListFragmentPresenter" />
+            type="se.hkr.fictioner.data_fragments.home_fragment.HomeFragmentPresenter" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
+        android:orientation="vertical"
+        android:layout_marginHorizontal="8dp">
+        <RelativeLayout
+            android:id="@+id/book_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
-            />
+            android:layout_marginHorizontal="40dp">
+            <LinearLayout
+                android:id="@+id/book_layout_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_book"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="4dp"/>
+                <Spinner
+                    android:id="@+id/current_book_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_title_placeholder"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/book_info_layout"
+                android:layout_below="@id/book_layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/current_book_title_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="new name for book..."
+                    android:text="@={presenter.newTitle}"
+                    android:layout_toStartOf="@+id/current_book_title_edit"
+                    />
+                <ImageButton
+                    android:id="@+id/current_book_title_edit"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit_black_24dp"
+                    android:onClick="@{presenter::handleBookTitleEditButtonPress}"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@id/book_info_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logout_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:onClick="@{presenter::handleLogoutButtonPress}"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/note_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </layout>

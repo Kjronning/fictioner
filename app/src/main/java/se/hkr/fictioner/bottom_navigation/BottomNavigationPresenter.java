@@ -72,4 +72,10 @@ public class BottomNavigationPresenter implements BottomNavigationContract.Prese
         this.tag = tag;
     }
 
+    @Override
+    public void changeBookTitle() {
+        contractView.changeBookTitleText(DataRepository.getCurrentBookTitle());
+    }
+
+
 }

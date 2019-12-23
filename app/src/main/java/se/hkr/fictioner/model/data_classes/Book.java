@@ -1,5 +1,7 @@
 package se.hkr.fictioner.model.data_classes;
 
+import android.provider.ContactsContract;
+
 import java.util.UUID;
 
 import io.realm.RealmList;
@@ -16,6 +18,7 @@ public class Book extends RealmObject {
     private RealmList<Event> events;
     private RealmList<Location> locations;
     private RealmList<Note> notes;
+    private String name;
 
     public Book(){
         id = UUID.randomUUID().toString();
@@ -101,5 +104,17 @@ public class Book extends RealmObject {
 
     public void setNotes(RealmList<Note> notes) {
         this.notes = notes;
+    }
+
+    public String getName() {
+        if (name == null)
+            return "Working title";
+        return name;
+    }
+
+    public void setName(String name) {
+        DataRepository.BeginTransaction();
+        this.name = name;
+        DataRepository.CommitTransaction();
     }
 }
