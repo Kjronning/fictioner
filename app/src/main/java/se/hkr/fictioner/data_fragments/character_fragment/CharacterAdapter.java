@@ -18,8 +18,8 @@ import se.hkr.fictioner.data_fragments.RepositoryListContract;
 import se.hkr.fictioner.model.data_classes.Character;
 
 public class CharacterAdapter extends RealmRecyclerViewAdapter<Character, CharacterViewHolder> {
-    CharacterListPresenter presenter;
-    RecyclerViewClickListener clickListener;
+    private CharacterListPresenter presenter;
+    private RecyclerViewClickListener clickListener;
 
     public CharacterAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
@@ -51,14 +51,7 @@ public class CharacterAdapter extends RealmRecyclerViewAdapter<Character, Charac
 class CharacterViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView, View.OnClickListener {
     private TextView bodyTextView;
     private TextView titleTextView;
-    private Button editButton;
     private RecyclerViewClickListener clickListener;
-
-    CharacterViewHolder(@NonNull View itemView) {
-        super(itemView);
-        bodyTextView = itemView.findViewById(R.id.body_text_view);
-        titleTextView = itemView.findViewById(R.id.title_text_view);
-    }
 
     CharacterViewHolder(@NonNull View itemView, RecyclerViewClickListener clickListener){
         super(itemView);

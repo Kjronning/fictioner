@@ -23,7 +23,7 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
     private LinearLayoutManager linearLayoutManager;
 
     public EventListFragment(RecyclerViewClickListener clickListener){
-        adapter = new EventAdapter(null, true);
+        adapter = new EventAdapter(null, true, clickListener);
     }
 
     @Override

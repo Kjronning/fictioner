@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
         TextView textView = findViewById(R.id.login_title_textview);
         Typeface typeface = getResources().getFont(R.font.grand_hotel);
         textView.setTypeface(typeface);
-        //TODO: make this method call a new method in presenter
-        if (UserData.getInstance().getUser() != null) presenter.handleLoggedIn();
+        presenter.handleLoggedIn();
     }
 
     @Override
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.Cont
 
     @Override
     public void changeScreen() {
-        makeToast("logged in!");
         Intent intent = new Intent(this, BottomNavigationActivity.class);
         startActivity(intent);
         //Change the screen to BottomNavigationActivity

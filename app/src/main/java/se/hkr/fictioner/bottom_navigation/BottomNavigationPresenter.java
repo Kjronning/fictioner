@@ -1,6 +1,5 @@
 package se.hkr.fictioner.bottom_navigation;
 
-import android.provider.ContactsContract;
 import android.view.View;
 
 import io.realm.RealmObject;
@@ -10,7 +9,6 @@ import se.hkr.fictioner.model.data_classes.Event;
 import se.hkr.fictioner.model.data_classes.Location;
 import se.hkr.fictioner.model.data_classes.Note;
 import se.hkr.fictioner.model.data_management.DataRepository;
-import se.hkr.fictioner.model.user_credentials.UserData;
 
 public class BottomNavigationPresenter implements BottomNavigationContract.Presenter{
 
@@ -57,22 +55,28 @@ public class BottomNavigationPresenter implements BottomNavigationContract.Prese
         System.out.println(String.format("add button pressed @ %s fragment", tag));
         switch(tag){
             case "note":
-                Note note = DataRepository.AddNoteToCurrentBook(new Note("",""));
+                Note note = DataRepository.AddNoteToCurrentBook(
+                        DataRepository.CreateNote(new Note("","")));
                 contractView.openEditDialogue(note,tag);
                 break;
             case "character":
-                Character character = DataRepository.AddCharacterToCurrentBook(new Character("",""));
+                Character character = DataRepository.AddCharacterToCurrentBook(
+                        DataRepository.CreateCharacter(new Character("","")));
                 contractView.openEditDialogue(character,tag);
                 break;
             case "chapter":
-                Chapter chapter = DataRepository.AddChapterToCurrentBook(new Chapter("",""));
+                Chapter chapter = DataRepository.AddChapterToCurrentBook(
+                        DataRepository.CreateChapter(new Chapter("","")));
                 contractView.openEditDialogue(chapter,tag);
+                break;
             case "event":
-                Event event = DataRepository.AddEventToCurrentBook(new Event("",""));
+                Event event = DataRepository.AddEventToCurrentBook(
+                        DataRepository.CreateEvent(new Event("","")));
                 contractView.openEditDialogue(event,tag);
                 break;
             case "location":
-                Location location = DataRepository.AddLocationToCurrentBook(new Location("",""));
+                Location location = DataRepository.AddLocationToCurrentBook(
+                        DataRepository.CreateLocation(new Location("","")));
                 contractView.openEditDialogue(location,tag);
                 break;
         }

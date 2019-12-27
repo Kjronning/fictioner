@@ -1,5 +1,6 @@
 package se.hkr.fictioner.data_fragments.home_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
+import se.hkr.fictioner.bottom_navigation.BottomNavigationActivity;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.databinding.HomeFragmentBinding;
+import se.hkr.fictioner.main.MainActivity;
 import se.hkr.fictioner.model.data_classes.Book;
 
 public class HomeFragment extends Fragment implements HomeFragmentContract.ContractView {
@@ -23,8 +27,8 @@ public class HomeFragment extends Fragment implements HomeFragmentContract.Contr
     HomeFragmentPresenter presenter;
     RecyclerView recyclerView;
 
-    public HomeFragment(){
-        adapter = new HomeAdapter(null, true);
+    public HomeFragment(RecyclerViewClickListener clickListener){
+        adapter = new HomeAdapter(null, true, clickListener);
         spinnerAdapter = new SpinnerAdapter(null);
     }
 
@@ -62,7 +66,8 @@ public class HomeFragment extends Fragment implements HomeFragmentContract.Contr
 
     @Override
     public void changeToLoginScreen() {
-
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
 
     @Override

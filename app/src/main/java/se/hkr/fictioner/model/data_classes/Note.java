@@ -1,13 +1,17 @@
 package se.hkr.fictioner.model.data_classes;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 public class Note extends RealmObject {
 
     private String body;
     @PrimaryKey
-    private String documentName;
+    @Required
+    private String documentName = UUID.randomUUID().toString();
     private String name;
     private Book book;
 

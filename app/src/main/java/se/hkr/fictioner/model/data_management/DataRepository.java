@@ -138,21 +138,17 @@ public class DataRepository {
         return LocalDataSource.CreateOrEditCharacter(character, name, body);
     }
 
-
     public static Event CreateOrEditEvent(Event event, String name, String summary) {
         return LocalDataSource.CreateOrEditEvent(event,name,summary);
     }
-
 
     public static Location CreateOrEditLocation(Location Location, String name, String summary) {
         return LocalDataSource.CreateOrEditLocation(Location,name,summary);
     }
 
-
     public static Note CreateOrEditNote(Note note, String name, String summary) {
         return LocalDataSource.CreateOrEditNote(note,name,summary);
     }
-
 
     public static Chapter CreateOrEditChapter(Chapter chapter, String name, String summary) {
         return LocalDataSource.CreateOrEditChapter(chapter,name,summary);

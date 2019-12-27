@@ -13,24 +13,19 @@ public class EditDialogPresenter {
     public void createObject(RealmObject object, String type, String nextName, String nextBody){
         switch (type){
             case "character":
-                Character character = DataRepository.CreateOrEditCharacter((Character)object, nextName, nextBody);
-                DataRepository.AddCharacterToCurrentBook(character);
+                DataRepository.CreateOrEditCharacter((Character)object, nextName, nextBody);
                 break;
             case "chapter":
-                Chapter chapter = DataRepository.CreateOrEditChapter((Chapter)object, nextName, nextBody);
-                DataRepository.AddChapterToCurrentBook(chapter);
+                DataRepository.CreateOrEditChapter((Chapter)object, nextName, nextBody);
                 break;
             case "location":
-                Location location = DataRepository.CreateOrEditLocation((Location)object, nextName, nextBody);
-                DataRepository.AddLocationToCurrentBook(location);
+                DataRepository.CreateOrEditLocation((Location)object, nextName, nextBody);
                 break;
             case "event":
-                Event event = DataRepository.CreateOrEditEvent((Event)object, nextName, nextBody);
-                DataRepository.AddEventToCurrentBook(event);
+                DataRepository.CreateOrEditEvent((Event)object, nextName, nextBody);
                 break;
             case "note":
-                Note note = DataRepository.CreateOrEditNote((Note)object, nextName, nextBody);
-                DataRepository.AddNoteToCurrentBook(note);
+                DataRepository.CreateOrEditNote((Note)object, nextName, nextBody);
                 break;
         }
     }

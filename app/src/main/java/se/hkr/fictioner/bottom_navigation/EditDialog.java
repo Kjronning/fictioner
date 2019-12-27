@@ -38,28 +38,36 @@ public class EditDialog extends DialogFragment {
         nameText = view.findViewById(R.id.edit_name);
         bodyText = view.findViewById(R.id.edit_body);
 
+
+        String nameString = "";
+        String bodyString = "";
+        String dString = String.format("Creating dialogue for type: %s, object class: %s", type, object.getClass().toString());
+        System.out.println(dString);
         switch (type){
             case "character":
-                nameText.setText(((Character)object).getName());
-                nameText.setText(((Character)object).getSummary());
+                nameString = ((Character)object).getName();
+                bodyString = ((Character)object).getSummary();
                 break;
             case "chapter":
-                nameText.setText(((Chapter)object).getName());
-                nameText.setText(((Chapter)object).getBody());
+                nameString = ((Chapter)object).getName();
+                bodyString = ((Chapter)object).getBody();
                 break;
             case "location":
-                nameText.setText(((Location)object).getName());
-                nameText.setText(((Location)object).getSummary());
+                nameString = ((Location)object).getName();
+                bodyString = ((Location)object).getSummary();
                 break;
             case "event":
-                nameText.setText(((Event)object).getName());
-                nameText.setText(((Event)object).getSummary());
+                nameString = ((Event)object).getName();
+                bodyString = ((Event)object).getSummary();
                 break;
             case "note":
-                nameText.setText(((Note)object).getName());
-                nameText.setText(((Note)object).getBody());
+                nameString = ((Note)object).getName();
+                bodyString = ((Note)object).getBody();
                 break;
         }
+        nameText.setText(nameString);
+        bodyText.setText(bodyString);
+
 
         builder.setView(view)
 

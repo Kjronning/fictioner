@@ -12,7 +12,7 @@ public class Character extends RealmObject {
     private String summary;
     @PrimaryKey
     @Required
-    private String documentName  = UUID.randomUUID().toString();
+    private String documentName = UUID.randomUUID().toString();
     private Book book;
 
 

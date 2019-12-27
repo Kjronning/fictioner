@@ -1,9 +1,11 @@
 package se.hkr.fictioner.model.data_classes;
 
 import java.util.Map;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 public class Chapter extends RealmObject {
 
@@ -11,7 +13,8 @@ public class Chapter extends RealmObject {
     private String body;
 
     @PrimaryKey
-    private String documentName;
+    @Required
+    private String documentName = UUID.randomUUID().toString();;
     private Book book;
 
 

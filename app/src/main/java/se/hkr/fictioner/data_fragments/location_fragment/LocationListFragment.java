@@ -24,7 +24,7 @@ public class LocationListFragment extends Fragment implements ListFragmentContra
     private LinearLayoutManager linearLayoutManager;
 
     public LocationListFragment(RecyclerViewClickListener clickListener){
-        adapter = new LocationAdapter(null, true);
+        adapter = new LocationAdapter(null, true, clickListener);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ChapterListFragment extends Fragment implements ListFragmentContrac
     private ListFragmentContract.Presenter presenter;
 
     public ChapterListFragment(RecyclerViewClickListener clickListener){
-        adapter = new ChapterAdapter(null, true);
+        adapter = new ChapterAdapter(null, true, clickListener);
     }
 
     @Override

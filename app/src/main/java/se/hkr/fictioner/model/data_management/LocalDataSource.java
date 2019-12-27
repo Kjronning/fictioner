@@ -47,18 +47,6 @@ class LocalDataSource {
         return GetInstance().where(User.class).equalTo("id", username).findFirst();
     }
 
-    static User FindUsernameAndPassword(String username, String password) {
-        User managedUser = GetInstance().where(User.class).equalTo("id", username).findFirst();
-        if (managedUser == null){
-            return null;
-        }
-        if (managedUser.isPasswordCorrect(password)){
-            return managedUser;
-        }else{
-            return null;
-        }
-    }
-
     static boolean IsPermanentUserData() {
         return GetInstance().where(PermanentUserData.class).count() == 1;
     }
@@ -92,11 +80,9 @@ class LocalDataSource {
     static Chapter AddChapterToCurrentBook(Chapter chapter){
         Realm realm = GetInstance();
         realm.beginTransaction();
-        Chapter mChapter = CreateChapter(chapter);
-        realm.beginTransaction();
-        UserData.getInstance().getUser().getCurrentBook().getChapters().add(mChapter);
+        UserData.getInstance().getUser().getCurrentBook().getChapters().add(chapter);
         realm.commitTransaction();
-        return mChapter;
+        return chapter;
     }
 
     static Character AddCharacterToCurrentBook(Character character){
@@ -107,34 +93,30 @@ class LocalDataSource {
         return character;
 
     }
+
     static Location AddLocationToCurrentBook(Location location){
         Realm realm = GetInstance();
-        Location mLocation = CreateLocation(location);
         realm.beginTransaction();
-        UserData.getInstance().getUser().getCurrentBook().getLocations().add(mLocation);
+        UserData.getInstance().getUser().getCurrentBook().getLocations().add(location);
         realm.commitTransaction();
-        return mLocation;
+        return location;
     }
+
     static Event AddEventToCurrentBook(Event event){
        Realm realm = GetInstance();
        realm.beginTransaction();
-       Event mEvent = CreateEvent(event);
+       UserData.getInstance().getUser().getCurrentBook().getEvents().add(event);
        realm.commitTransaction();
-       realm.beginTransaction();
-       UserData.getInstance().getUser().getCurrentBook().getEvents().add(mEvent);
-       realm.commitTransaction();
-       return mEvent;
+       return event;
     }
 
     static Note AddNoteToCurrentBook(Note note){
         Realm realm = GetInstance();
-        Note mNote = CreateNote(note);
         realm.beginTransaction();
-        UserData.getInstance().getUser().getCurrentBook().getNotes().add(mNote);
+        UserData.getInstance().getUser().getCurrentBook().getNotes().add(note);
         realm.commitTransaction();
-        return mNote;
+        return note;
     }
-
 
     static boolean IsUserInDatabase(String username) {
        return GetInstance().where(User.class).contains("id",username).count() == 1;
@@ -142,10 +124,6 @@ class LocalDataSource {
 
     static void BeginTransaction() {
         GetInstance().beginTransaction();
-    }
-
-    static void SaveItem(RealmObject object) {
-        GetInstance().copyToRealm(object);
     }
 
     static void CommitTransaction(){
@@ -157,7 +135,6 @@ class LocalDataSource {
         realm.beginTransaction();
         UserData.getInstance().getUser().getBooks().add(book);
         realm.commitTransaction();
-
     }
 
     static Book CreateBook(String userId, String name) {
@@ -169,7 +146,6 @@ class LocalDataSource {
         return realmObject;
     }
 
-
     static Character CreateCharacter(Character character) {
         Realm realm = GetInstance();
         realm.beginTransaction();
@@ -177,7 +153,6 @@ class LocalDataSource {
         realm.commitTransaction();
         return realmObject;
     }
-
 
     static Chapter CreateChapter(Chapter chapter) {
         Realm realm = GetInstance();
@@ -247,38 +222,69 @@ class LocalDataSource {
         return character;
     }
 
+    static Chapter CreateOrEditChapter(final Chapter chapter, final String name, final String body) {
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                chapter.setName(name);
+            }
+        });
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                chapter.setBody(body);
+            }
+        });
 
-    static Chapter CreateOrEditChapter(Chapter chapter, String name, String body) {
-        GetInstance().beginTransaction();
-        chapter.setName(name);
-        chapter.setBody(body);
-        GetInstance().commitTransaction();
-        return GetInstance().copyToRealmOrUpdate(chapter);
+        return chapter;
     }
 
-    static Event CreateOrEditEvent(Event event, String name, String summary) {
-        GetInstance().beginTransaction();
-        event.setName(name);
-        event.setSummary(summary);
-        GetInstance().commitTransaction();
-        return GetInstance().copyToRealmOrUpdate(event);
+    static Event CreateOrEditEvent(final Event event, final String name, final String summary) {
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                event.setName(name);
+            }
+        });
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                event.setSummary(summary);
+            }
+        });
+        return event;
     }
 
-    static Location CreateOrEditLocation(Location location, String name, String summary) {
-        GetInstance().beginTransaction();
-        location.setName(name);
-        location.setSummary(summary);
-        GetInstance().commitTransaction();
-        return GetInstance().copyToRealmOrUpdate(location);
+    static Location CreateOrEditLocation(final Location location, final String name, final String summary) {
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                location.setName(name);
+            }
+        });
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                location.setSummary(summary);
+            }
+        });
+        return location;
     }
 
-
-    static Note CreateOrEditNote(Note note, String name, String body) {
-        GetInstance().beginTransaction();
-        note.setName(name);
-        note.setBody(body);
-        GetInstance().commitTransaction();
-        return GetInstance().copyToRealmOrUpdate(note);
+    static Note CreateOrEditNote(final Note note, final String name, final String body) {
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                note.setName(name);
+            }
+        });
+        GetInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                note.setBody(body);
+            }
+        });
+        return note;
     }
 
     static void DeleteObject(final RealmObject object) {

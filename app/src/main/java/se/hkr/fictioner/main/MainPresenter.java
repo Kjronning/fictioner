@@ -4,6 +4,7 @@ import android.view.View;
 
 import se.hkr.fictioner.model.data_classes.User;
 import se.hkr.fictioner.model.data_management.DataRepository;
+import se.hkr.fictioner.model.user_credentials.UserData;
 
 public class MainPresenter implements MainContract.Presenter{
     private MainContract.ContractView contractView;
@@ -48,7 +49,8 @@ public class MainPresenter implements MainContract.Presenter{
 
     @Override
     public void handleLoggedIn() {
-        contractView.changeScreen();
+        if (UserData.getInstance().getUser() != null)
+            contractView.changeScreen();
     }
 
     @Override

@@ -12,12 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import se.hkr.fictioner.R;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.data_fragments.RepositoryListContract;
 import se.hkr.fictioner.model.data_classes.Character;
 import se.hkr.fictioner.model.data_classes.Location;
 
 public class LocationAdapter extends RealmRecyclerViewAdapter<Location, LocationViewHolder> {
     LocationListPresenter presenter;
+    private RecyclerViewClickListener clickListener;
+
+
+    public LocationAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, RecyclerViewClickListener clickListener) {
+        super(data, autoUpdate);
+        this.clickListener = clickListener;
+    }
 
     public LocationAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
@@ -32,7 +40,7 @@ public class LocationAdapter extends RealmRecyclerViewAdapter<Location, Location
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_list_item, parent, false);
         presenter = new LocationListPresenter();
-        return new LocationViewHolder(itemView);
+        return new LocationViewHolder(itemView, clickListener);
 
     }
 
@@ -43,14 +51,17 @@ public class LocationAdapter extends RealmRecyclerViewAdapter<Location, Location
     }
 }
 
-class LocationViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView {
+class LocationViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView, View.OnClickListener {
     private TextView bodyTextView;
     private TextView titleTextView;
+    private RecyclerViewClickListener clickListener;
 
-    LocationViewHolder(@NonNull View itemView) {
+    LocationViewHolder(@NonNull View itemView, RecyclerViewClickListener clickListener) {
         super(itemView);
         bodyTextView = itemView.findViewById(R.id.body_text_view);
         titleTextView = itemView.findViewById(R.id.title_text_view);
+        this.clickListener = clickListener;
+        itemView.setOnClickListener(this);
     }
 
     @Override
@@ -61,5 +72,10 @@ class LocationViewHolder extends RecyclerView.ViewHolder implements RepositoryLi
     @Override
     public void setBody(String body) {
         bodyTextView.setText(body);
+    }
+
+    @Override
+    public void onClick(View v) {
+        clickListener.onClick(v, getAdapterPosition(), "location");
     }
 }

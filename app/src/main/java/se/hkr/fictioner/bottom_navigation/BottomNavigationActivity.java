@@ -100,7 +100,7 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     }
 
     private void setFragments(RecyclerViewClickListener listener){
-        homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment(listener);
         chapterListFragment = new ChapterListFragment(listener);
         characterListFragment = new CharacterListFragment(listener);
         locationListFragment = new LocationListFragment(listener);
