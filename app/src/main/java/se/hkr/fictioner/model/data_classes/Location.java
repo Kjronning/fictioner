@@ -12,7 +12,12 @@ public class Location extends RealmObject {
     private Book book;
 
     public Location(){
-        name = "new location";
+
+    }
+
+    public Location(String name, String summary){
+        this.name = name;
+        this.summary = summary;
     }
 
     public String getDocumentName() {

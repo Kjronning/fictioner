@@ -12,7 +12,12 @@ public class Note extends RealmObject {
     private Book book;
 
     public Note(){
-        name = "new note";
+
+    }
+
+    public Note(String name, String body){
+        this.name = name;
+        this.body = body;
     }
     public String getName() {
         return name;

@@ -29,7 +29,11 @@ public class Character extends RealmObject {
     }
 
     public Character(){
-        name = "new character";
+    }
+
+    public Character(String name, String summary){
+        this.name = name;
+        this.summary = summary;
     }
 
     public String getName() {

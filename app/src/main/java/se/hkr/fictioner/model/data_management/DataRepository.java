@@ -20,8 +20,8 @@ public class DataRepository {
         return LocalDataSource.GetItemsFromCurrentBook(type);
     }
 
-    public static Book CreateBook(String userId){
-        return LocalDataSource.CreateBook(userId);
+    public static Book CreateBook(String userId, String name){
+        return LocalDataSource.CreateBook(userId, name);
     }
 
     public static Character CreateCharacter(){
@@ -102,23 +102,23 @@ public class DataRepository {
     }
 
     public static void AddNoteToCurrentBook() {
-        LocalDataSource.AddNoteToCurrentBook(new Note());
+        LocalDataSource.AddNoteToCurrentBook(new Note("New note", "Body goes here."));
     }
 
     public static void AddCharacterToCurrentBook() {
-        LocalDataSource.AddCharacterToCurrentBook(new Character());
+        LocalDataSource.AddCharacterToCurrentBook(new Character("New character", "Summary goes here."));
     }
 
     public static void AddChapterToCurrentBook() {
-        LocalDataSource.AddChapterToCurrentBook(new Chapter());
+        LocalDataSource.AddChapterToCurrentBook(new Chapter("New chapter", "Body goes here."));
     }
 
     public static void AddEventToCurrentBook() {
-        LocalDataSource.AddEventToCurrentBook(new Event());
+        LocalDataSource.AddEventToCurrentBook(new Event("New event", "Summary goes here."));
     }
 
     public static void AddLocationToCurrentBook() {
-        LocalDataSource.AddLocationToCurrentBook(new Location());
+        LocalDataSource.AddLocationToCurrentBook(new Location("New location", "Summary goes here."));
     }
 
     public static String getCurrentBookTitle() {

@@ -12,35 +12,52 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import se.hkr.fictioner.R;
-import se.hkr.fictioner.model.data_classes.Character;
+import se.hkr.fictioner.data_fragments.RepositoryListContract;
 import se.hkr.fictioner.model.data_classes.Event;
 
-public class EventAdapter extends RealmRecyclerViewAdapter {
-    public EventAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
-        super(data, autoUpdate);
-    }
+public class EventAdapter extends RealmRecyclerViewAdapter<Event, EventViewHolder>{
+    EventListPresenter presenter;
 
     public EventAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, boolean updateOnModification) {
         super(data, autoUpdate, updateOnModification);
     }
 
+    public EventAdapter(@Nullable OrderedRealmCollection<Event> data, boolean autoUpdate) {
+        super(data, autoUpdate);
+    }
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_item, parent, false);
-        return new ViewHolder(itemView);
+        presenter = new EventListPresenter();
+        return new EventViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Event currentItem = (Event)getItem(position);
+    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
+        presenter.onBindRepositoryViewAtPosition(position,holder);
     }
 }
 
-class ViewHolder extends RecyclerView.ViewHolder{
+class EventViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView {
+    private TextView bodyTextView;
+    private TextView titleTextView;
 
 
-    ViewHolder(@NonNull View itemView) {
+    EventViewHolder(@NonNull View itemView) {
         super(itemView);
+        bodyTextView = itemView.findViewById(R.id.body_text_view);
+        titleTextView = itemView.findViewById(R.id.title_text_view);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        titleTextView.setText(title);
+    }
+
+    @Override
+    public void setBody(String body) {
+        bodyTextView.setText(body);
     }
 }

@@ -15,6 +15,12 @@ public class Chapter extends RealmObject {
     private Book book;
 
 
+    public Chapter(String name, String body){
+        this.name = name;
+        this.body = body;
+    }
+
+
     public String getDocumentName() {
         return documentName;
     }

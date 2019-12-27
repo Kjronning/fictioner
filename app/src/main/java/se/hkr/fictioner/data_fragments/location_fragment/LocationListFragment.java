@@ -46,6 +46,11 @@ public class LocationListFragment extends Fragment implements ListFragmentContra
     }
 
     @Override
+    public void openEditDialog() {
+
+    }
+
+    @Override
     public void setPresenter(ListFragmentContract.Presenter presenter) {
         this.presenter = presenter;
     }

@@ -25,4 +25,9 @@ public class EventListFragmentPresenter  implements ListFragmentContract.Present
 
         contractView.setListItems(listData);
     }
+
+    @Override
+    public void handleEditButtonPress() {
+
+    }
 }

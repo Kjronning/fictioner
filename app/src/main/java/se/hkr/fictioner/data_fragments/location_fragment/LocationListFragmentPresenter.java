@@ -23,4 +23,9 @@ public class LocationListFragmentPresenter implements ListFragmentContract.Prese
     public void sendListDataToAdapter() {
         contractView.setListItems(listData);
     }
+
+    @Override
+    public void handleEditButtonPress() {
+        contractView.openEditDialog();
+    }
 }

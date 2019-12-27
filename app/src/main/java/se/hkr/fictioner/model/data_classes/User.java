@@ -51,7 +51,7 @@ public class User extends RealmObject {
 
     public Book getCurrentBook(){
         if (currentBook == null){
-            Book book = DataRepository.CreateBook(id);
+            Book book = DataRepository.CreateBook(id, "new book");
             DataRepository.ChangeCurrentBook(book);
             DataRepository.AddBookToCurrentUser(currentBook);
         }

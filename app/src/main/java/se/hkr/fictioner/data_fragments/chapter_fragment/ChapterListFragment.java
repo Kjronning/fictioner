@@ -18,8 +18,6 @@ import se.hkr.fictioner.databinding.ChapterFragmentBinding;
 public class ChapterListFragment extends Fragment implements ListFragmentContract.ContractView {
     private ChapterAdapter adapter;
     private ListFragmentContract.Presenter presenter;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
 
     public ChapterListFragment(){
         adapter = new ChapterAdapter(null, true);
@@ -32,15 +30,20 @@ public class ChapterListFragment extends Fragment implements ListFragmentContrac
         ChapterFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.chapter_fragment,container,false);
         View view = binding.getRoot();
         binding.setPresenter(presenter);
-        recyclerView = view.findViewById(R.id.chapter_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.chapter_recycler_view);
         recyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;
     }
     @Override
     public void setListItems(RealmList items) {
         adapter.updateData(items);
+    }
+
+    @Override
+    public void openEditDialog() {
+
     }
 
     @Override

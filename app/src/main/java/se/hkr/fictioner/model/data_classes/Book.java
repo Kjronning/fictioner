@@ -24,9 +24,10 @@ public class Book extends RealmObject {
         id = UUID.randomUUID().toString();
     }
 
-    public Book(String userId){
+    public Book(String userId, String name){
         this();
         this.userId = userId;
+        this.name = name;
     }
 
     public String getId() {

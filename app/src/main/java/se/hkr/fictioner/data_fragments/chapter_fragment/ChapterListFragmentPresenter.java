@@ -24,4 +24,9 @@ public class ChapterListFragmentPresenter implements ListFragmentContract.Presen
     public void sendListDataToAdapter() {
         contractView.setListItems(listData);
     }
+
+    @Override
+    public void handleEditButtonPress() {
+
+    }
 }

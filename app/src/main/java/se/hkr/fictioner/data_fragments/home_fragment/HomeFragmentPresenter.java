@@ -2,17 +2,13 @@ package se.hkr.fictioner.data_fragments.home_fragment;
 
 import android.view.View;
 
-import io.realm.RealmList;
 import se.hkr.fictioner.model.data_classes.Book;
-import se.hkr.fictioner.model.data_classes.Note;
 import se.hkr.fictioner.model.data_management.DataRepository;
 import se.hkr.fictioner.model.user_credentials.UserData;
 
 public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private HomeFragmentContract.ContractView contractView;
-    private RealmList<Note> listData;
-    private RealmList<Book> bookListData;
-    private String newTitle = "new title";
+    private String newTitle;
 
     public HomeFragmentPresenter(HomeFragmentContract.ContractView contractView){
         this.contractView = contractView;
@@ -21,13 +17,11 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void sendListDataToAdapter() {
-        contractView.setListItems(listData);
+        contractView.setListItems(DataRepository.GetItemsFromCurrentBook("note"));
     }
 
     @Override
     public void fetchObjectListFromCurrentBook() {
-         listData = DataRepository.GetItemsFromCurrentBook("note");
-         bookListData = UserData.getInstance().getUser().getBooks();
     }
 
     @Override
@@ -55,7 +49,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void sendListDataToSpinnerAdapter(){
-        contractView.setListItemsToSpinner(bookListData);
+        contractView.setListItemsToSpinner(UserData.getInstance().getUser().getBooks());
     }
 
     public String getNewTitle() {

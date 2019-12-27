@@ -112,6 +112,11 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     }
 
     @Override
+    public void onBackPressed(){
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_navigation);

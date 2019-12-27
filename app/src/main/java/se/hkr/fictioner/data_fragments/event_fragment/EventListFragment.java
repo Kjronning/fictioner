@@ -45,6 +45,11 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
     }
 
     @Override
+    public void openEditDialog() {
+
+    }
+
+    @Override
     public void setPresenter(ListFragmentContract.Presenter presenter) {
         this.presenter = presenter;
     }

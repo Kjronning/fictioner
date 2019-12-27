@@ -11,7 +11,11 @@ public class Event extends RealmObject {
     private Book book;
 
     public Event(){
-        name = "new event";
+    }
+
+    public Event(String name, String summary){
+        this.name = name;
+        this.summary = summary;
     }
 
 

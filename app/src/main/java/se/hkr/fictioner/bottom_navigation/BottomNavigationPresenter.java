@@ -54,6 +54,8 @@ public class BottomNavigationPresenter implements BottomNavigationContract.Prese
                 break;
             case "characters":
                 DataRepository.AddCharacterToCurrentBook();
+                System.out.println("Character size: " + DataRepository.GetItemsFromCurrentBook("character").size());
+
                 break;
             case "chapters":
                 DataRepository.AddChapterToCurrentBook();
