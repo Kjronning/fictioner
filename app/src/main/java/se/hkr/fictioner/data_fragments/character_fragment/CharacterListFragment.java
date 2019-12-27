@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.databinding.CharacterFragmentBinding;
 
 public class CharacterListFragment extends Fragment implements ListFragmentContract.ContractView {
@@ -23,8 +24,8 @@ public class CharacterListFragment extends Fragment implements ListFragmentContr
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    public CharacterListFragment(){
-        adapter = new CharacterAdapter(null, true);
+    public CharacterListFragment(RecyclerViewClickListener clickListener){
+        adapter = new CharacterAdapter(null, true, clickListener);
     }
 
     @Override

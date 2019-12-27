@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.databinding.ChapterFragmentBinding;
 
 public class ChapterListFragment extends Fragment implements ListFragmentContract.ContractView {
     private ChapterAdapter adapter;
     private ListFragmentContract.Presenter presenter;
 
-    public ChapterListFragment(){
+    public ChapterListFragment(RecyclerViewClickListener clickListener){
         adapter = new ChapterAdapter(null, true);
     }
 

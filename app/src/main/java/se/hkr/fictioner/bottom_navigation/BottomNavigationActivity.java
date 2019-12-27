@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import io.realm.RealmObject;
 import se.hkr.fictioner.R;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.data_fragments.chapter_fragment.ChapterListFragment;
 import se.hkr.fictioner.data_fragments.chapter_fragment.ChapterListFragmentPresenter;
 import se.hkr.fictioner.data_fragments.character_fragment.CharacterListFragment;
@@ -97,18 +99,18 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         homeFragment.setPresenter(homeFragmentPresenter);
     }
 
-    private void setFragments(){
+    private void setFragments(RecyclerViewClickListener listener){
         homeFragment = new HomeFragment();
-        chapterListFragment = new ChapterListFragment();
-        characterListFragment = new CharacterListFragment();
-        locationListFragment = new LocationListFragment();
-        eventListFragment = new EventListFragment();
+        chapterListFragment = new ChapterListFragment(listener);
+        characterListFragment = new CharacterListFragment(listener);
+        locationListFragment = new LocationListFragment(listener);
+        eventListFragment = new EventListFragment(listener);
         currentFragment = homeFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, chapterListFragment, "chapters").hide(chapterListFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, characterListFragment, "characters").hide(characterListFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, locationListFragment, "locations").hide(locationListFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, eventListFragment, "events").hide(eventListFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, homeFragment, "home").commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, chapterListFragment, "chapter").hide(chapterListFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, characterListFragment, "character").hide(characterListFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, locationListFragment, "location").hide(locationListFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, eventListFragment, "event").hide(eventListFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, homeFragment, "note").commit();
     }
 
     @Override
@@ -121,9 +123,15 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_navigation);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        RecyclerViewClickListener listener = new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position, String type) {
+                presenter.handleRecyclerViewClick(type, position);
+            }
+        };
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         fab = findViewById(R.id.add_button);
-        setFragments();
+        setFragments(listener);
         setPresenters();
         attachPresentersToFragments();
         setDataToFragments();
@@ -196,6 +204,11 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
     public void changeBookTitleText(String currentBookTitle) {
         if(bookTitleTextView!=null)
         bookTitleTextView.setText(currentBookTitle);
+    }
+
+    @Override
+    public void openEditDialogue(RealmObject object, String type) {
+        new EditDialog(object,type).show(getSupportFragmentManager(),"dialog");
     }
 
     private void switchToFragment(Fragment fragment){

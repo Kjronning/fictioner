@@ -3,6 +3,7 @@ package se.hkr.fictioner.model.data_management;
 import android.content.Context;
 
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import se.hkr.fictioner.model.data_classes.Book;
 import se.hkr.fictioner.model.data_classes.Chapter;
 import se.hkr.fictioner.model.data_classes.Character;
@@ -24,24 +25,24 @@ public class DataRepository {
         return LocalDataSource.CreateBook(userId, name);
     }
 
-    public static Character CreateCharacter(){
-        return LocalDataSource.CreateCharacter();
+    public static Character CreateCharacter(Character character){
+        return LocalDataSource.CreateCharacter(character);
     }
 
-    public static Chapter CreateChapter(){
-        return LocalDataSource.CreateChapter();
+    public static Chapter CreateChapter(Chapter chapter){
+        return LocalDataSource.CreateChapter(chapter);
     }
 
-    public static Location CreateLocation(){
-        return LocalDataSource.CreateLocation();
+    public static Location CreateLocation(Location location){
+        return LocalDataSource.CreateLocation(location);
     }
 
-    public static Event CreateEvent(){
-        return LocalDataSource.CreateEvent();
+    public static Event CreateEvent(Event event){
+        return LocalDataSource.CreateEvent(event);
     }
 
-    public static Note CreateNote(){
-        return LocalDataSource.CreateNote();
+    public static Note CreateNote(Note note){
+        return LocalDataSource.CreateNote(note);
     }
 
     public static void BeginTransaction(){
@@ -101,24 +102,24 @@ public class DataRepository {
         LocalDataSource.AddListToDatabase(list);
     }
 
-    public static void AddNoteToCurrentBook() {
-        LocalDataSource.AddNoteToCurrentBook(new Note("New note", "Body goes here."));
+    public static Note AddNoteToCurrentBook(Note note) {
+        return LocalDataSource.AddNoteToCurrentBook(note);
     }
 
-    public static void AddCharacterToCurrentBook() {
-        LocalDataSource.AddCharacterToCurrentBook(new Character("New character", "Summary goes here."));
+    public static Character AddCharacterToCurrentBook(Character character) {
+        return LocalDataSource.AddCharacterToCurrentBook(character);
     }
 
-    public static void AddChapterToCurrentBook() {
-        LocalDataSource.AddChapterToCurrentBook(new Chapter("New chapter", "Body goes here."));
+    public static Chapter AddChapterToCurrentBook(Chapter chapter) {
+        return LocalDataSource.AddChapterToCurrentBook(chapter);
     }
 
-    public static void AddEventToCurrentBook() {
-        LocalDataSource.AddEventToCurrentBook(new Event("New event", "Summary goes here."));
+    public static Event AddEventToCurrentBook(Event event) {
+       return LocalDataSource.AddEventToCurrentBook(event);
     }
 
-    public static void AddLocationToCurrentBook() {
-        LocalDataSource.AddLocationToCurrentBook(new Location("New location", "Summary goes here."));
+    public static Location AddLocationToCurrentBook(Location location) {
+        return LocalDataSource.AddLocationToCurrentBook(location);
     }
 
     public static String getCurrentBookTitle() {
@@ -131,5 +132,33 @@ public class DataRepository {
 
     public static void ChangeCurrentBookName(String newTitle) {
         LocalDataSource.ChangeCurrentBookName(newTitle);
+    }
+
+    public static Character CreateOrEditCharacter(Character character, String name, String body) {
+        return LocalDataSource.CreateOrEditCharacter(character, name, body);
+    }
+
+
+    public static Event CreateOrEditEvent(Event event, String name, String summary) {
+        return LocalDataSource.CreateOrEditEvent(event,name,summary);
+    }
+
+
+    public static Location CreateOrEditLocation(Location Location, String name, String summary) {
+        return LocalDataSource.CreateOrEditLocation(Location,name,summary);
+    }
+
+
+    public static Note CreateOrEditNote(Note note, String name, String summary) {
+        return LocalDataSource.CreateOrEditNote(note,name,summary);
+    }
+
+
+    public static Chapter CreateOrEditChapter(Chapter chapter, String name, String summary) {
+        return LocalDataSource.CreateOrEditChapter(chapter,name,summary);
+    }
+
+    public static void DeleteObject(RealmObject object) {
+        LocalDataSource.DeleteObject(object);
     }
 }

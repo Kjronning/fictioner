@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.databinding.LocationFragmentBinding;
 
 public class LocationListFragment extends Fragment implements ListFragmentContract.ContractView {
@@ -22,7 +23,7 @@ public class LocationListFragment extends Fragment implements ListFragmentContra
     RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    public LocationListFragment(){
+    public LocationListFragment(RecyclerViewClickListener clickListener){
         adapter = new LocationAdapter(null, true);
     }
 

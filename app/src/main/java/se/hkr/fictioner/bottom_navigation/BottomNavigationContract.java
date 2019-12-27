@@ -2,6 +2,8 @@ package se.hkr.fictioner.bottom_navigation;
 
 import android.view.View;
 
+import io.realm.RealmObject;
+
 public interface BottomNavigationContract {
 
     interface ContractView{
@@ -13,6 +15,8 @@ public interface BottomNavigationContract {
         void setFabIcon(int resource);
 
         void changeBookTitleText(String currentBookTitle);
+
+        void openEditDialogue(RealmObject object, String type);
     }
     interface Presenter {
         void handleCharacterButtonPress();
@@ -32,5 +36,7 @@ public interface BottomNavigationContract {
         void setTag(String tag);
 
         void changeBookTitle();
+
+        void handleRecyclerViewClick(String type, int position);
     }
 }

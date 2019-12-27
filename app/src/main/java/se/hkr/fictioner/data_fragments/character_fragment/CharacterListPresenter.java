@@ -8,7 +8,9 @@ public class CharacterListPresenter implements RepositoryListContract.Presenter 
     @Override
     public void onBindRepositoryViewAtPosition(int position, RepositoryListContract.ContractView holder) {
         Character character = (Character)DataRepository.GetItemsFromCurrentBook("character").get(position);
-        holder.setTitle(character.getName());
-        holder.setBody(character.getSummary());
+        String name = character != null ? character.getName() : "";
+        String summary = character != null ? character.getSummary() : "";
+        holder.setTitle(name);
+        holder.setBody(summary);
     }
 }

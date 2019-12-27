@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.RealmList;
 import se.hkr.fictioner.R;
 import se.hkr.fictioner.data_fragments.ListFragmentContract;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.databinding.EventFragmentBinding;
 
 public class EventListFragment extends Fragment implements ListFragmentContract.ContractView {
@@ -21,7 +22,7 @@ public class EventListFragment extends Fragment implements ListFragmentContract.
     RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    public EventListFragment(){
+    public EventListFragment(RecyclerViewClickListener clickListener){
         adapter = new EventAdapter(null, true);
     }
 

@@ -3,6 +3,7 @@ package se.hkr.fictioner.data_fragments.character_fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import se.hkr.fictioner.R;
+import se.hkr.fictioner.data_fragments.RecyclerViewClickListener;
 import se.hkr.fictioner.data_fragments.RepositoryListContract;
 import se.hkr.fictioner.model.data_classes.Character;
 
 public class CharacterAdapter extends RealmRecyclerViewAdapter<Character, CharacterViewHolder> {
     CharacterListPresenter presenter;
+    RecyclerViewClickListener clickListener;
 
     public CharacterAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate) {
         super(data, autoUpdate);
@@ -26,30 +29,43 @@ public class CharacterAdapter extends RealmRecyclerViewAdapter<Character, Charac
         super(data, autoUpdate, updateOnModification);
     }
 
+    public CharacterAdapter(@Nullable OrderedRealmCollection data, boolean autoUpdate, RecyclerViewClickListener clickListener){
+        super(data, autoUpdate);
+        this.clickListener = clickListener;
+    }
+
     @NonNull
     @Override
     public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_list_item, parent, false);
         presenter = new CharacterListPresenter();
-        return new CharacterViewHolder(itemView);
-
+        return new CharacterViewHolder(itemView, clickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
         presenter.onBindRepositoryViewAtPosition(position,holder);
-
     }
 }
 
-class CharacterViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView {
+class CharacterViewHolder extends RecyclerView.ViewHolder implements RepositoryListContract.ContractView, View.OnClickListener {
     private TextView bodyTextView;
     private TextView titleTextView;
+    private Button editButton;
+    private RecyclerViewClickListener clickListener;
 
     CharacterViewHolder(@NonNull View itemView) {
         super(itemView);
         bodyTextView = itemView.findViewById(R.id.body_text_view);
         titleTextView = itemView.findViewById(R.id.title_text_view);
+    }
+
+    CharacterViewHolder(@NonNull View itemView, RecyclerViewClickListener clickListener){
+        super(itemView);
+        bodyTextView = itemView.findViewById(R.id.body_text_view);
+        titleTextView = itemView.findViewById(R.id.title_text_view);
+        this.clickListener = clickListener;
+        itemView.setOnClickListener(this);
     }
 
     @Override
@@ -60,5 +76,10 @@ class CharacterViewHolder extends RecyclerView.ViewHolder implements RepositoryL
     @Override
     public void setBody(String body) {
         bodyTextView.setText(body);
+    }
+
+    @Override
+    public void onClick(View v) {
+        clickListener.onClick(v, getAdapterPosition(), "character");
     }
 }

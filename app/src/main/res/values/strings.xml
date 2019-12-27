@@ -17,4 +17,8 @@
     <string name="login_title">Fictioner</string>
     <string name="book_title_placeholder">Book Title</string>
     <string name="current_book">Current Book:</string>
+    <string name="name">Name...</string>
+    <string name="body">Body...</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
 </resources>
